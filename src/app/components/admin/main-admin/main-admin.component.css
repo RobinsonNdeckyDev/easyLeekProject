@@ -1,0 +1,48 @@
+.main-content {
+    height: 100vh;
+}
+
+.contentPage{
+    height: 100%;
+    /* border: 1px solid red; */
+}
+
+.sidebar {
+    height: 100vh;
+    /* background-color: #0F42A8; */
+    /* overflow-y: scroll; */
+}
+
+.contenu {
+    height: 100vh;
+    overflow: hidden;
+    /* overflow-y: scroll; */
+}
+
+.navbar {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    width: 100%;
+    /* background-color: black; */
+}
+
+@media only screen and (max-width: 768px) {
+    .sidebar {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        /* display: none; */
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+
+    .main-content {
+        z-index: 1;
+        position: relative;
+        top: 0;
+    }
+
+}

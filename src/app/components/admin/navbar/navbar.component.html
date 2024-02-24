@@ -1,0 +1,27 @@
+<div class="Navbar sticky-top  d-flex justify-content-between px-5">
+    <div class="navLeft d-flex">
+        <div class="imgLogo">
+            <img src="/assets/logo/logo.png" class="img-fluid" alt="">
+        </div>
+        <div class="burger">
+            <i class="fa fa-bars barMenu" (click)="toggleSidebar()"></i>
+        </div>
+    </div>
+
+    <div class="rightNav mx-4">
+
+        <div class="dropdown-center m-0 p-0">
+            <button type="button" class="btn m-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../../../../assets/images/profil/profil2.jpg" class="" alt="">
+                <span></span>
+                <!-- {{userConnected?.prenom}} -->
+            </button>
+            <ul class="dropdown-menu mt-3 border">
+                <li><a class="dropdown-item" routerLink="profil_Admin">Mon profil</a></li>
+                <li class=""><a class="dropdown-item" routerLink="profil_Admin">Deconnexion</a></li>
+                <!-- <app-logout-admin></app-logout-admin> -->
+            </ul>
+        </div>
+
+    </div>
+</div>

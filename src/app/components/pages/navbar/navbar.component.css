@@ -1,0 +1,48 @@
+.Navigation {
+    border: 1px solid rgb(169, 20, 20);
+    background-color: white;
+    padding: 0 200px !important;
+}
+
+.Navigation nav{
+    padding: 8px 0;
+}
+
+.logo img {
+    width: 60px;
+}
+
+.navbar-nav li a {
+    color: black;
+    font-weight: 700;
+    font-family: 'Quattrocento Sans', Helmet, Freesans, Tahoma, Geneva, sans-serif;
+}
+
+.connexion {
+    background-color: #0F42A8 !important;
+}
+
+.burger i {
+    color: #ffc4ac !important;
+    font-size: 35px;
+}
+
+.activeLink {
+    color: #ffc4ac;
+    border-bottom: 2px solid #ffc4ac !important;
+}
+
+.icons a{
+    text-decoration: none;
+    color: #ffc4ac;
+}
+
+.icons a i{
+    font-size: 25px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .Navigation{
+        padding: 0 10px !important;
+    }
+}
