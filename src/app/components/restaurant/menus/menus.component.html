@@ -1,1 +1,50 @@
-<p>menus works!</p>
+<div class="py-4 px-4">
+    <h5 class="navTitle"><a href="" routerLink="menus" class="my-3">Liste des menus</a></h5>
+
+    <div class="row .row2 mt-4 shadow rounded-4">
+        <div class="col-12 ">
+            <div class="tableCard py-4 border-0 ">
+
+                <button class="btn mb-4 active">
+                    ajouter un menu
+                </button>
+
+                <!-- <div *ngIf="acheteurs.length === 0">
+                    <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'acheteurs disponibles pour
+                        l'instant...</p>
+                </div> -->
+
+                <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100">
+                        <thead>
+                            <tr class="text-center titleHead">
+                                <th scope="col">Id</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td scope="col"></td>
+                                <td scope="col"></td>
+                                <td scope="col"></td>
+                                <td scope="col">
+                                    <span class="mx-2"><i class="fa-solid fa-eye iconDetail" data-bs-toggle="modal"
+                                            data-bs-target="#detailClient">
+                                            <!-- (click)="openAcheteurDetails(acheteur)" -->
+                                        </i>
+                                    </span>
+                                    <span class="mx-2"><i class="bi bi-x-square-fill iconDetail">
+                                            <!-- (click)="supprimerAcheteur(acheteur)" -->
+                                        </i>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,6 +11,7 @@ import { PlatsComponent } from './plats/plats.component';
 import { CommandesComponent } from './commandes/commandes.component';
 import { AvisComponent } from './avis/avis.component';
 import { FormsModule } from '@angular/forms';
+import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({
@@ -27,7 +28,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RestaurantRoutingModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule,
+    DataTablesModule
   ]
 })
 export class RestaurantModule { }
