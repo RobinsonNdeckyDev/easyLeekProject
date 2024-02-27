@@ -4,19 +4,34 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { InscriptionComponent } from './components/auth/inscription/inscription.component';
+// import { InscriptionComponent } from './components/auth/inscription/inscription.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { firebaseConfig } from './shared/firebaseConfig';
+import { StorageModule } from '@angular/fire/storage';
+import { DataTablesModule } from 'angular-datatables';
+
+
+
+
 @NgModule({
-  declarations: [AppComponent, LoginComponent, InscriptionComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireStorageModule,
+    DataTablesModule,
+    // DataTablesModule.forRoot(),
+
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

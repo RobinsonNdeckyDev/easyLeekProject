@@ -1,1 +1,139 @@
-<p>menus works!</p>
+<section class="home-section">
+  <div>
+    <div>
+      <h3 class="text-center mt-2 fw-bold titremere-blog">Listes des menu</h3>
+      <div class="d-flex justify-content-between">
+        <div>
+          <button class="btn fw-bold  boutonajouter-blog me-4" data-bs-toggle="modal"
+            data-bs-target="#ajoutermenu">Ajouter menu</button>
+        </div>
+        <div class="search">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control inputPorteur" placeholder="Chercher un plat">
+            <button class="input-group-text iconsearch" id="basic-addon1"><i class="bi bi-search"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Affichage des menus -->
+  <div>
+    <div class="card w-75" style="margin-top: 8%; border: 2px solid red; margin-left: 15%; border: 1px solid #F7E801;">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <!-- <th scope="col" style="background-color: #FFA07A; font-weight: bold;">#</th> -->
+                <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Nom</th>
+                <!-- <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Nommbre de plat</th> -->
+                <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Date</th>
+                <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let menu of menus">
+              <tr>
+                <!-- <th scope="row">{{ menu.id }}</th> -->
+                <td>{{ menu.titre }}</td>
+                <!-- <td>{{plat.plats.length}}</td> -->
+                <td>{{ menu.created_at | date:'dd/MM/yyyy' }}</td>
+                <td>
+                  <ul class="d-flex list-group list-group-horizontal">
+                    <li class="list-group-item" data-bs-toggle="modal" data-bs-target="#editmenuModal"
+                      (click)="editmenuModal(menu.id, menu.titre)"><i class="bi bi-pencil-square"></i></li>
+                    <li class="list-group-item" (click)="deletemenu(menu.id)"><i class="bi bi-trash3"></i></li>
+                    <li class="list-group-item" data-bs-toggle="modal" data-bs-target="#detailmenuModal"
+                      (click)="detail(menu.id); loadPlats(selectedMenu.id)">
+                      <i class="bi bi-eye"></i>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ajout d'un menu -->
+    <div class="modal fade" id="ajoutermenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title w-100 fs-4 titreAjout text-center">Ajouter un menu</h1>
+            <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i
+                class="bi bi-x-lg"></i></button>
+          </div>
+          <div class="modal-body">
+            <form class="titremenu" (ngSubmit)="addmenu()">
+              <div class="mb-3">
+                <label for="titremenu">Titre du menu:</label>
+                <input class="form-control" type="text" id="titremenu" name="titremenu" required [(ngModel)]="newmenu">
+              </div>
+              <button class="btn btn-add" type="submit">Ajouter</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Édition d'un menu -->
+    <div class="modal fade" id="editmenuModal" tabindex="-1" aria-labelledby="modifierLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title titreMdfmenu w-100 text-center fs-3" id="modifierLabel">Modifier menu</h1>
+            <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" aria-label="Close"><i
+                class="bi bi-x-lg"></i></button>
+          </div>
+          <div class="modal-body">
+            <form class="mdfmenu" (ngSubmit)="editmenu(editingMenu.id, editedTitre)">
+              <div class="mb-3">
+                <label for="editTitle">Nouveau titre:</label>
+                <input id="editTitle" class="form-control" name="titre" required [(ngModel)]="editedTitre">
+              </div>
+              <div class="mdfBtns d-flex justify-content-between">
+                <button type="submit" class="btn btnUpdate" data-bs-dismiss="modal">Enregistrer</button>
+                <button type="button" class="btn btnAnnuler" data-bs-dismiss="modal">Annuler</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="detailmenuModal" tabindex="-1" aria-labelledby="detailrestaurateurModalLabel"
+    aria-hidden="true" *ngFor="let selectedMenu of menus">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title w-100 fs-4 titreAjout text-center">Détails du menu</h1>
+          <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i
+              class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h5>Nom du menu:</h5>
+              <p>{{ selectedMenu.titre }}</p>
+            </div>
+            <div>
+              <h5>Date de création:</h5>
+              <p>{{ selectedMenu.created_at | date:'dd/MM/yyyy' }}</p>
+            </div>
+            <!-- <div *ngFor=" let plat of plats">
+              <h5>Nombre de plats:</h5>
+              <p>{{plats.length}}</p>
+            </div> -->
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" data-bs-toggle="modal">Voir Plat</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

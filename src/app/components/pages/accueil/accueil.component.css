@@ -1,0 +1,105 @@
+.carouselBaniere{
+    width: 100%;
+    height: 550px;
+}
+.carouselBaniere img{
+    height: 100%;
+}
+.cardRestoEntete{
+    background-color: #F1F2F3;
+}
+.cardFooterResto{
+ background-color: #F8F3C6;
+ border-top: 1px solid #F8F3C6;
+ border-bottom: 1px solid black;
+}
+.cardBodyResto{
+    background-color: #F8F3C6;
+}
+.cardResto{
+    background-color: #F8F3C6;
+    box-shadow: 1px solid #000;
+}
+.badgeEtatResto{
+    background-color: #5D3C22;
+    color: #F8F3C6;
+    border: 2px solid #5D3C22;
+    font-size: 12px;
+}
+.boutonCommandeDts , .boutonVoirDts{
+    background-color: #FFA07A;
+    color: white;
+    border: 1px solid #FFA07A;
+}
+.boutonVoirDts{
+    font-size: medium;
+}
+.active {
+    background-color: #FFA07A !important;
+    color: #F8F3C6;
+    font-weight: bold;
+}
+.carteNoscible{
+    width: 100%;
+    height: 35%;
+    margin: 0 auto;
+    background-color: #F8F3C6;
+    border: 1px solid #F8F3C6
+}
+.carteRestoNekh{
+    margin: 0 auto;
+    width: 90%;
+    margin: 0 auto;
+    border: none;
+}
+.carteRestoNekh .titreCartenekh{
+ font-weight: bold;
+ font-style: normal;
+}
+.carteRestoNekh .titreCartenekh span{
+ color: #FFA07A;
+ 
+}
+.circles {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40vh;
+}
+
+.cerclemini {
+    width: 125px;
+    height: 142px;
+    /* border-radius: 100%; */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between; 
+    text-align: center; 
+    background-color: #F8F3C6;
+    box-sizing: border-box;
+    flex: 0 0 auto;
+}
+
+.cerclemini img {
+    /* width: 100%;  */
+    width: 125px;
+    height: 125px;
+    border-radius: 100%; 
+}
+
+.cerclemini span {
+    /* padding-top: 14px; */
+    text-align: center;
+    align-self: center;
+}
+.typedeResto{
+    background-color: #F8F3C6 !important;
+    color: #5D3C22;
+    font-weight: bold;
+
+}
+
+
+
+

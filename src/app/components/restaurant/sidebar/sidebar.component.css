@@ -1,7 +1,7 @@
 .sidebar-content {
     /* border: 1px solid rgb(9, 9, 9); */
     /* padding-top: 40px; */
-    background-color: #c13c08;
+    background-color: #5D3C22;
 }
 
 .sidebar-content h1 {
@@ -43,7 +43,7 @@
 }
 
 .activeLink a {
-    color: #c13c08;
+    color: #5D3C22;
 }
 
 .logoConnect {

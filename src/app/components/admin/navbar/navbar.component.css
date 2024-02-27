@@ -7,6 +7,8 @@
     background-color: white;
     color: black;
     border-bottom: 2px ssolid #fe5d1d !important;
+    /* FFA07A */
+    /* 5D3C22 */
 }
 
 .Navbar .navLeft {
@@ -48,12 +50,12 @@
 
 .Navbar .burger i {
     font-size: 30px;
-    color: #fe5d1d;
+    color: #FFA07A;
     cursor: pointer;
 }
 
 .rightNav .dropdown-center button {
-    background-color: #fe5d1d;
+    background-color: #FFA07A;
     color: white;
 }
 

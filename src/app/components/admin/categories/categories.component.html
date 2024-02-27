@@ -1,1 +1,157 @@
-<p>categories works!</p>
+<section class="contenumilieux">
+  <!-- <div>
+  <h3 class="text-center mt-2 fw-bold titremere-blog">Listes des categories</h3>
+  <div class="d-flex justify-content-between">
+    <button class="btn fw-bold  boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajouterCategorie">Ajouter categorie</button>
+    <div class="search">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control inputPorteur" placeholder="Chercher un categorie">
+        <button class="input-group-text iconsearch" id="basic-addon1"><i class="bi bi-search"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card w-75" style="margin-top:8%;border:2px solid red;margin-left:15%;border:1px solid #F7E801;">
+  <div class="card-body">
+    <table class="table border">
+      <thead>
+        <tr>
+          <th scope="col" style="background-color: #FFA07A;font-weight:bold;">#</th>
+          <th scope="col" style="background-color: #FFA07A;font-weight:bold;">Nom</th>
+          <th scope="col" style="background-color: #FFA07A;font-weight:bold;">Date</th>
+          <th scope="col" style="background-color: #FFA07A;font-weight:bold;">Action</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let categorie of categories">
+        <tr>
+          <td>{{ categorie.id }}</td>
+          <td>{{ categorie.type }}</td>
+          <td>{{ categorie.created_at | date:'dd/MM/yyyy'}} <td>
+          <td>
+            <span data-bs-toggle="modal" data-bs-target="#editcategorieModal" (click)="editcategorieModal(categorie.id, categorie.type)"><i class="bi bi-pencil-square display-6"></i> </span>
+            <span  class="me-3" (click)="deletecategorie(categorie.id)"><i class="bi bi-trash3 display-6"></i></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+  <div class="py-4 px-4" >
+    <h5 class="navTitle text-center"><a href="" routerLink="categories" class="my-3 text-black text-decoration-none text-center">Liste des ccategories</a></h5>
+
+    <div class="row .row2 mt-4 shadow rounded-4">
+      <div class="col-12 ">
+        <div class="tableCard py-4 border-0 ">
+
+          <button class="btn mb-4 active boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajouterCategorie">
+            ajouter une catégorie
+          </button>
+
+          <div class="table-responsive">
+            <table class="table row-border hover w-100">
+              <!-- dattable [dtOptions]="dtOptions" -->
+              <thead>
+                <tr class="text-center titleHead">
+                  <th scope="col">Image</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let categorie of categories">
+                <tr class="text-center">
+                  <td scope="col"><img src="{{ categorie.image }}" alt="" style="width: 50px; height: 50px;"></td>
+                  <td scope="col">{{ categorie.type }}</td>
+                  <td scope="col">{{ categorie.created_at | date:'dd/MM/yyyy'}}</td>
+                  <td scope="col">
+                    <span class="mx-2"><i class="bi bi-pencil-square iconDetail" data-bs-toggle="modal"
+                        data-bs-target="#editcategorieModal" (click)="editcategorieModal(categorie.id)">
+                      </i>
+                    </span>
+                    <!-- <span class="mx-2"><i class="bi bi-x-square-fill iconDetail"
+                        (click)="categorie(categorie.id)">
+                      </i>
+                    </span> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <!-- les modalles -->
+  <!-- debut model d'ajoute d'un categorie dans le blog -->
+  <div class="modal fade" id="ajouterCategorie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title w-100 fs-4 titreAjout text-center">Ajouter un categorie</h1>
+          <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i
+              class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body">
+          <form class="titreCategorie" (ngSubmit)="save()">
+            <div class="mb-3">
+              <label for="type">Titre du catégorie:</label>
+              <input class="form-control" type="text" id="type" name="type" required [(ngModel)]="type">
+            </div>
+            <div class="mb-4">
+              <label for="inputImage" class="form-label">Image</label>
+              <input type="file" class="form-control" id="inputGroupFile02" name="image" [(ngModel)]="image"
+                (change)="upload($event)" accept="image/*">
+            </div>
+
+            <button class="btn btn-add" type="submit" data-bs-toggle="modal">Ajouter</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin du model d'ajoute d'un categorie dans le blog -->
+
+
+
+  <!-- debut du model de modification  -->
+  <div class="modal fade" id="editcategorieModal" tabindex="-1" aria-labelledby="modifierLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title titreMdfcategorie w-100 text-center fs-3" id="modifierLabel">Modifier categorie</h1>
+          <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" aria-label="Close"><i
+              class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body">
+          <form class="mdfcategorie" (ngSubmit)="saveChanges()">
+            <div class="mb-3">
+              <label for="editTitle">Nouveau titre:</label>
+              <input id="editedType" class="form-control" name="editedType" required [(ngModel)]="editedType">
+            </div>
+            <div class="mb-4">
+              <label for="editImageInput" class="form-label">Image</label>
+              <input type="file" class="form-control" id="editImageInput" name="editImage"
+                [(ngModel)]="editImage" (change)="upload($event)" accept="image/*">
+            </div>
+
+            <div class="mdfBtns d-flex justify-content-between">
+              <button type="submit" class="btn btnUpdate" data-bs-dismiss="modal" (click)="saveChanges()">Enregistrer</button>
+              <button type="button" class="btn btnAnnuler" data-bs-dismiss="modal">Annuler</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin du model de modification  -->
+  <!-- les modalles -->
+</section>

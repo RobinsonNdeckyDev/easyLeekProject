@@ -1,1 +1,96 @@
-<p>login works!</p>
+<!-- login.component.html -->
+
+<div class="container container-fluid shadow-lg border-black" [class.sign-up-mode]="!isSignIn">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <!-- debut connexion -->
+        <form *ngIf="isSignIn" class="sign-in-form" (ngSubmit)="login()">
+          <h2 class="title">Se connecter</h2>
+          <label for="">Entre votre Email</label>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="email" placeholder="Veuillez entrer votre mail" [(ngModel)]="email" name="email" required/>
+          </div>
+          <label for="">Entre votre mot de passe</label>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Veuillez entrer votre mot de passe" [(ngModel)]="password" name="password"/>
+          </div>
+          <input type="submit" value="Se connecter" class="btn solid" />
+        </form>
+        <!-- fin connexion -->
+        <!-- debut inscription -->
+        <form *ngIf="!isSignIn" class="sign-up-form" (ngSubmit)="onRegister()">
+          <!-- <h2 class="title">S'inscrire</h2> -->
+          <label for="">Votre Nom complet</label>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Nom" [(ngModel)]="username" name="username"/>
+          </div>
+          <label for="">Votre Email</label>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Email" [(ngModel)]="registerEmail" name="registerEmail"/>
+          </div>
+          <label for="">Votre Address</label>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Address" [(ngModel)]="adresse" name="adresse"/>
+          </div>
+          <label for="">Votre Telephone</label>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="number" placeholder="Numero de telephone" [(ngModel)]="phone" name="phone"/>
+          </div>
+          <label for="">Votre Mot de passe</label>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" [(ngModel)]="registerPassword" name="registerPassword" />
+          </div>
+          <input type="submit" class="btn" value="S'inscrire" />
+        </form>
+        <!-- fin inscription -->
+      </div>
+    </div>
+  
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <div class="left-panel-content">
+            <div *ngIf="isSignIn">
+              <p><img style="width: 60px;" routerLink="/accueil"  src="/assets/logoE.png" alt=""></p>
+              <h3>Nouveau ici ?</h3>
+            </div>
+              <p *ngIf="isSignIn">
+              Merci de vous inscrire, votre participation est cruciale pour améliorer notre plateforme et offrir une expérience optimale à chacun.
+            </p>
+            <button class="btn transparent" (click)="toggleForm()">
+              S'inscrire
+            </button>
+            <img src="../../../assets/drawconnexion.png" alt="" class="image">
+          </div>
+        </div>
+      </div>
+    
+      <div class="panel right-panel">
+        <div class="content">
+          <div class="right-panel-content">
+            <div>
+              <div *ngIf="!isSignIn">
+                <p><img style="width: 60px;" routerLink="/accueil" src="/assets/logoE.png" alt=""></p>
+                <h3 >Avez-vous un compte</h3>
+              </div>
+              <p *ngIf="!isSignIn">
+                Votre fidélité contribue à l'amélioration constante de nos services pour vous offrir une expérience toujours plus satisfaisante.
+              </p>
+              <button class="btn transparent" (click)="toggleForm()">
+                Se connecter
+              </button>
+            </div>
+            <img src="../../../assets/drawinscrire.png" alt="" class="image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+     

@@ -1,1 +1,141 @@
-<p>restaurants works!</p>
+<section class="milieuxcontenu">
+<!-- Liste des restaurateurs -->
+<div>
+  <h3 class="text-center mt-2 fw-bold titremere-blog">Listes des restaurants</h3>
+  <div class="d-flex justify-content-between">
+    <button class="btn fw-bold  boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajouterRestaurant">Ajouter restaurant</button>
+    <div class="search">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control inputPorteur" placeholder="Chercher un restaurant">
+        <button class="input-group-text iconsearch" id="basic-addon1"><i class="bi bi-search"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center">
+  <!-- <button class="btn fw-bold me-3 boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajoutplat">Liste des Restaurants</button>
+  <button class="btn fw-bold me-3  boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajoutplat">Restaurant Active</button>
+  <button class="btn fw-bold me-3 boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajoutplat">Restaurant Desactiver</button> -->
+</div>
+<div class="card w-75" style="margin-top: 8%; border: 2px solid red; margin-left: 15%; border: 1px solid #F7E801;">
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <!-- <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Photo</th> -->
+          <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Nom</th>
+          <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Lieu</th>
+          <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Téléphone</th>
+          <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Action</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let restaurateur of restaurateurs">
+        <tr>
+          <td><img src="http://127.0.0.1:8000/images/{{restaurateur.image}}" alt="" width="50" height="50"></td>
+          <td>{{ restaurateur.name }}</td>
+          <td>{{ restaurateur.adresse }}</td>
+          <td>{{ restaurateur.phone }}</td>
+          <td>
+            <ul class="d-flex list-group list-group-horizontal">
+              <!-- Bouton pour voir les détails -->
+              <li class="list-group-item" data-bs-toggle="modal" data-bs-target="#detailrestaurateurModal" (click)="getDetailsRestaurant(restaurateur)"><i class="bi bi-eye"></i></li>
+              <!-- Bouton pour supprimer le restaurant -->
+              <li class="list-group-item">
+                <!-- <i [class]="restaurateur.isBlocked ? 'bi-unlock' : 'bi-trash3'"></i> -->
+                <!-- <i class="bi bi-person-fill-check"></i>
+                <i class="bi bi-person-fill-lock"></i> -->
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal pour ajouter un restaurant -->
+<!-- Modal pour ajouter un restaurant -->
+<div class="modal fade" id="ajouterRestaurant" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title w-100 fs-4 titreAjout text-center">Ajouter un restaurant</h1>
+        <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="save()">
+          <!-- Ajoutez ici les champs pour l'ajout d'un restaurant -->
+          <div class="mb-3">
+            <label for="name">Nom du restaurant:</label>
+            <input class="form-control" type="text" id="name" name="name" [(ngModel)]="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="email">Email du restaurateur:</label>
+            <input class="form-control" type="email" id="email" name="email" [(ngModel)]="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="phone">Telephone du restaurateur:</label>
+            <input class="form-control" type="number" id="phone" name="phone" [(ngModel)]="phone" required>
+          </div>
+          <div class="mb-3">
+            <label for="password">Mot de passe</label>
+            <input class="form-control" type="password" id="password" name="password" [(ngModel)]="password" required>
+          </div>
+          <div class="mb-3">
+            <label for="adresse">Adresse du restaurateur:</label>
+            <input class="form-control" type="text" id="adresse" name="adresse" [(ngModel)]="adresse" required>
+          </div>
+          <div class="mb-3">
+            <label for="descriptionrestaurateur">Description du restaurant:</label>
+            <input class="form-control" type="text" id="descriptionrestaurateur" name="description" [(ngModel)]="description" required>
+          </div>
+          <div class="mb-4">
+            <label for="inputImage" class="form-label">Image du restaurant</label>
+            <input type="file" class="form-control" id="inputGroupFile02" name="image" [(ngModel)]="image"
+            (change)="upload($event)" accept="image/*">
+          </div>
+          <div class="mb-3">
+            <label for="categorie_type">Type de catégorie:</label>
+            <select id="categorie_type" name="categorie_type" [(ngModel)]="categorie_id" required>
+              <option *ngFor="let categorie of categories" [value]="categorie.id">{{ categorie.type }}</option>
+            </select>
+          </div>     
+          <button class="btn btn-add" type="submit">Ajouter</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ajout restaurateur -->
+ <!-- details restaurateur -->
+ <!-- Modal pour afficher les détails d'un restaurateur -->
+<div class="modal fade" id="detailrestaurateurModal" tabindex="-1" aria-labelledby="detailrestaurateurModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title w-100 fs-4 titreAjout text-center">Détails du restaurateur</h1>
+        <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <!-- Affichez ici les détails du restaurateur -->
+        <div>
+          <h2>Nom du restaurateur:</h2>
+          <p>{{ name }}</p>
+        </div>
+        <div>
+          <h2>Adresse du restaurateur:</h2>
+          <p>{{ adresse }}</p>
+        </div>
+        <div>
+          <h2>Numéro de téléphone:</h2>
+          <p>{{ phone }}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button class="btn btn-danger" data-bs-dismiss="modal">Desactiver </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- details restaurateur -->
+</section>
