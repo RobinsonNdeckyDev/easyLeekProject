@@ -1,0 +1,23 @@
+.proxiHead {
+    display: flex;
+    justify-content: space-between;
+}
+
+.proxiHead .categorie,
+.search {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.proxiHead .search span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2% 3%;
+    background-color: #ffc4ac;
+}
+
+.proxiHead .search span i {
+    color: white;
+}
