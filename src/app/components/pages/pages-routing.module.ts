@@ -4,7 +4,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { LoginComponent } from '../auth/login/login.component';
+// import { LoginComponent } from '../auth/login/login.component';
 import { RestoComponent } from './resto/resto.component';
 
 const routes: Routes = [
@@ -16,7 +16,7 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'resto', component: RestoComponent },
-      { path: 'login', component: LoginComponent },
+      // { path: 'login', component: LoginComponent },
       { path: '', redirectTo: 'accueil', pathMatch: 'full' },
     ],
   },

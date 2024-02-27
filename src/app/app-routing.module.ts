@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/auth/login/login.component';
-import { InscriptionComponent } from './components/auth/inscription/inscription.component';
+import { ConnexionComponent } from './components/auth/connexion/connexion.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'inscription', component: InscriptionComponent },
+  { path: 'login', component: ConnexionComponent },
   {
     path: 'admin',
     loadChildren: () =>
