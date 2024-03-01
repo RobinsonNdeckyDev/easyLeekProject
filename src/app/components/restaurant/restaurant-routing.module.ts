@@ -6,11 +6,13 @@ import { AvisComponent } from './avis/avis.component';
 import { CommandesComponent } from './commandes/commandes.component';
 import { MenusComponent } from './menus/menus.component';
 import { PlatsComponent } from './plats/plats.component';
+import { RestaurantGuard } from 'src/app/guard/restaurant.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: MainRestaurantComponent,
+    canActivate :[RestaurantGuard],
     children: [
       { path: 'accueilRestaurant', component: AccueilRestaurantComponent },
       { path: 'avis', component: AvisComponent },

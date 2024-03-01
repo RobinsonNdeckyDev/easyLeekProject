@@ -1,0 +1,89 @@
+<app-navbar></app-navbar>
+
+<div class="card w-75" style="margin-top: 8%; border: 2px solid red; margin-left: 15%; border: 1px solid #f7e801;">
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" style="background-color: #ffa07a; font-weight: bold">Image</th>
+            <th scope="col" style="background-color: #ffa07a; font-weight: bold">Nom du plat</th>
+            <th scope="col" style="background-color: #ffa07a; font-weight: bold">Prix Unitaire</th>
+            <th scope="col" style="background-color: #ffa07a; font-weight: bold">Quantite</th>
+            <th scope="col" style="background-color: #ffa07a; font-weight: bold">Prix Total</th>
+            <th scope="col" style="background-color: #ffa07a; font-weight: bold">Supprimer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of panier; let index = index">
+            <td scope="row">
+              <img src="{{ item.image }}" alt="Image du plat" width="50px" height="50px" />
+            </td>
+            <td>{{ item.libelle }}</td>
+            <td>{{ item.prix }} fcfa</td>
+            <td>
+              <div>
+                <button (click)="diminuerQuantite(item)"><i class="bi bi-dash"></i></button>
+                {{ item.quantite }}
+                <button (click)="augmenterQuantite(item)"><i class="bi bi-plus"></i></button>
+              </div>
+            </td>
+            <td>{{ item.prix * item.quantite }} fcfa</td>
+            <td>
+              <button (click)="supprimerDuPanier(item)"><i class="bi bi-x"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="somme container">
+        <div class="d-flex total">
+          <h3 class="me-3">Total : {{ calculerTotal() }} fcfa</h3>
+        </div>
+        <div *ngIf="panier.length > 0">
+          <button type="button" class="btn ajoutelemnt commandebtn" data-bs-toggle="modal"
+            data-bs-target="#exampleModalCommande">Commander</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Le modal -->
+  <div class="modal fade" id="exampleModalCommande" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Votre commande  </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4>Récapitulatif</h4>
+          <div class="form-group">
+            <label for="adresseLivraison">Adresse de Livraison</label><br>
+            <select [(ngModel)]="adresseLivraison" name="adresseLivraison">
+              <option value="Dakar">Dakar</option>
+              <option value="Parcelle">Parcelle</option>
+              <option value="Rufisque">Rufisque</option>
+            </select>
+          </div>
+          <div class="d-flex total">
+            <h3 class="me-3">Total Quantité : {{ calculerTotalquatite() }}</h3>
+          </div>
+          <!-- Le reste du contenu -->
+          <div class="card w-75"
+            style="margin-top: 8%; border: 2px solid red; margin-left: 15%; border: 1px solid #f7e801;">
+            <div class="card-body">
+              <div class="somme container">
+                <div class="d-flex total">
+                  <h3 class="me-3">Total : {{ calculerTotal() }} fr</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn  commandebtn" (click)="passerCommande()">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

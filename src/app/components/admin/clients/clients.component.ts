@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { error } from 'jquery';
+import { ClientService } from 'src/app/Services/client/client.service';
 
 @Component({
   selector: 'app-clients',
@@ -7,7 +9,9 @@ import { Component } from '@angular/core';
 })
 export class ClientsComponent {
   dtOptions: DataTables.Settings = {};
+  clients :any []=[];
 
+constructor( private clientService : ClientService){}
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -28,6 +32,17 @@ export class ClientsComponent {
         },
       },
     };
-
+  this.getAllclient();
   }
+
+  getAllclient() {
+    this.clientService.getListeClients().subscribe((response: any) => {
+      console.log("Regarder", response)
+      this.clients = response.data;
+    },
+    (error) => {
+      console.log(error);
+    }
+    );
+}
 }

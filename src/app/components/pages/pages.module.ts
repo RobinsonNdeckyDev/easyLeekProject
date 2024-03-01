@@ -10,6 +10,8 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { MainPageComponent } from './main-page/main-page.component';
 import { RestoComponent } from './resto/resto.component';
+import { ProfilComponent } from './profil/profil.component';
+import { PanierComponent } from './panier/panier.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { RestoComponent } from './resto/resto.component';
     NavbarComponent,
     FooterComponent,
     MainPageComponent,
-    RestoComponent
+    RestoComponent,
+    ProfilComponent,
+    PanierComponent
   ],
   imports: [
     CommonModule,

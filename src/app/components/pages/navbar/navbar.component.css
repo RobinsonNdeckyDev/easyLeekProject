@@ -19,25 +19,31 @@
 }
 
 .connexion {
-    background-color: #0F42A8 !important;
+    background-color: black !important;
 }
 
 .burger i {
-    color: #ffc4ac !important;
+    color: var(--rose) !important;
     font-size: 35px;
 }
 
 .activeLink {
     color: #ffc4ac;
-    border-bottom: 2px solid #ffc4ac !important;
+    border-bottom: 2px solid var(--rose) !important;
 }
 
 .icons a{
     text-decoration: none;
-    color: #ffc4ac;
+    color: var(--rose);
+}
+.droprouge{
+    background-color: var(--fisa);
 }
 
-.icons a i{
+.icons i{
+    /* font-size: 25px; */
+}
+.iconpanier{
     font-size: 25px;
 }
 

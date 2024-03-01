@@ -36,9 +36,28 @@ export class RestaurantsComponent {
     };
   categorieTypes: string[] = [];
 
+
   constructor(private ajoutRestaurateurService: AjoutRestaurateurService , private categorieService :CategorieService , private storage: AngularFireStorage) {}
 
   ngOnInit(): void {
+    this.dtOptions = {
+      searching: true,
+      lengthChange: false,
+      paging: true,
+      pageLength: 5,
+      pagingType: 'simple_numbers',
+      info: false,
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json',
+
+        paginate: {
+          first: '<<', // Personnalise le texte de la flèche pour la première page
+          previous: '<', // Personnalise le texte de la flèche pour la page précédente
+          next: '>', // Personnalise le texte de la flèche pour la page suivante
+          last: '>>', // Personnalise le texte de la flèche pour la dernière page
+        },
+      },
+    };
     this.getListeRestaurateurs();
     this.getAllCategories();
   }
@@ -157,7 +176,7 @@ activerRestaurant(restaurateur: any): void {
   
     save() {
       if (this.fichierAdd) {
-        const filePath = 'plat/' + this.fichierAdd.name;
+        const filePath = 'restaurateur/' + this.fichierAdd.name;
         const fileRef = this.storage.ref(filePath);
         const task = this.storage.upload(filePath, this.fichierAdd);
   

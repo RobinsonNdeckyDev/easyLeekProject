@@ -18,6 +18,7 @@ export class CategoriesComponent {
   editImage!: File;
   image!: File;
   type: any;
+  fichierAdd: any;
   dtOptions: DataTables.Settings = {};
   // dtTrigger: Subject<any> = new Subject();
 
@@ -57,18 +58,18 @@ export class CategoriesComponent {
   }
 
 
-  deletecategorie(categorieId: number) {
-    console.log("c'est la categorie ", categorieId);
-    this.categorieService.deletecategorie(categorieId).subscribe(
-      (response: any) => {
-        console.log("Catégorie a supprimée", response);
-        // this.getAllCategories();
-    },
-    (error) => {
-      console.log(error);
-    }
-    );
-}
+//   deletecategorie(categorieId: number) {
+//     console.log("c'est la categorie ", categorieId);
+//     this.categorieService.deletecategorie(categorieId).subscribe(
+//       (response: any) => {
+//         console.log("Catégorie a supprimée", response);
+//         // this.getAllCategories();
+//     },
+//     (error) => {
+//       console.log(error);
+//     }
+//     );
+// }
 
   saveChanges() {
     console.log("Type modifié :", this.editedType);
@@ -76,12 +77,6 @@ export class CategoriesComponent {
       type: this.editedType,
       image: this.editImage || this.editingCategory.image,
     };
-    // console.log("Catégorie mise à jour :", updatedCategory);
-  
-    // // Vérifiez la console pour vous assurer que this.editingCategory.id a une valeur valide ici
-    // console.log("ID de la catégorie à mettre à jour :", this.editingCategory);
-  
-    // Assurez-vous que this.editingCategory.id a une valeur valide ici avant d'appeler updateCategory
     if (this.editingCategory) {
       if (this.editImage) {
         // Si l'image est modifiée, téléchargez la nouvelle image dans Firebase Storage
@@ -136,7 +131,6 @@ export class CategoriesComponent {
   }
 
 
-  fichierAdd: any;
 
 
   upload(event: any) {
@@ -180,25 +174,4 @@ export class CategoriesComponent {
       }
     );
   }
-
-  // ngOnInit(): void {
-  //   this.dtOptions = {
-  //     searching: true,
-  //     lengthChange: false,
-  //     paging: true,
-  //     pageLength: 5,
-  //     pagingType: 'simple_numbers',
-  //     info: false,
-  //     language: {
-  //       url: 'https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json',
-
-  //       paginate: {
-  //         first: '<<', // Personnalise le texte de la flèche pour la première page
-  //         previous: '<', // Personnalise le texte de la flèche pour la page précédente
-  //         next: '>', // Personnalise le texte de la flèche pour la page suivante
-  //         last: '>>', // Personnalise le texte de la flèche pour la dernière page
-  //       },
-  //     },
-  //   };
-  // }
 }

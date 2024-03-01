@@ -1,94 +1,48 @@
-<section class="contenumilieux">
-  <!-- <div>
-  <h3 class="text-center mt-2 fw-bold titremere-blog">Listes des categories</h3>
-  <div class="d-flex justify-content-between">
-    <button class="btn fw-bold  boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajouterCategorie">Ajouter categorie</button>
-    <div class="search">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control inputPorteur" placeholder="Chercher un categorie">
-        <button class="input-group-text iconsearch" id="basic-addon1"><i class="bi bi-search"></i></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card w-75" style="margin-top:8%;border:2px solid red;margin-left:15%;border:1px solid #F7E801;">
-  <div class="card-body">
-    <table class="table border">
-      <thead>
-        <tr>
-          <th scope="col" style="background-color: #FFA07A;font-weight:bold;">#</th>
-          <th scope="col" style="background-color: #FFA07A;font-weight:bold;">Nom</th>
-          <th scope="col" style="background-color: #FFA07A;font-weight:bold;">Date</th>
-          <th scope="col" style="background-color: #FFA07A;font-weight:bold;">Action</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let categorie of categories">
-        <tr>
-          <td>{{ categorie.id }}</td>
-          <td>{{ categorie.type }}</td>
-          <td>{{ categorie.created_at | date:'dd/MM/yyyy'}} <td>
-          <td>
-            <span data-bs-toggle="modal" data-bs-target="#editcategorieModal" (click)="editcategorieModal(categorie.id, categorie.type)"><i class="bi bi-pencil-square display-6"></i> </span>
-            <span  class="me-3" (click)="deletecategorie(categorie.id)"><i class="bi bi-trash3 display-6"></i></span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div> -->
-  <div class="py-4 px-4" >
-    <h5 class="navTitle text-center"><a href="" routerLink="categories" class="my-3 text-black text-decoration-none text-center">Liste des ccategories</a></h5>
+  <div class="py-4 px-4">
+    <h5 class="navTitle"><a href="" routerLink="categories" class="my-3">Liste des categories</a></h5>
 
     <div class="row .row2 mt-4 shadow rounded-4">
-      <div class="col-12 ">
-        <div class="tableCard py-4 border-0 ">
+        <div class="col-12 ">
+            <div class="tableCard py-4 border-0 ">
 
-          <button class="btn mb-4 active boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajouterCategorie">
-            ajouter une catégorie
-          </button>
+              <button class="btn mb-4 active boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajouterCategorie">
+                ajouter une catégorie
+              </button>
 
-          <div class="table-responsive">
-            <table class="table row-border hover w-100">
-              <!-- dattable [dtOptions]="dtOptions" -->
-              <thead>
-                <tr class="text-center titleHead">
-                  <th scope="col">Image</th>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let categorie of categories">
-                <tr class="text-center">
-                  <td scope="col"><img src="{{ categorie.image }}" alt="" style="width: 50px; height: 50px;"></td>
-                  <td scope="col">{{ categorie.type }}</td>
-                  <td scope="col">{{ categorie.created_at | date:'dd/MM/yyyy'}}</td>
-                  <td scope="col">
-                    <span class="mx-2"><i class="bi bi-pencil-square iconDetail" data-bs-toggle="modal"
-                        data-bs-target="#editcategorieModal" (click)="editcategorieModal(categorie.id)">
-                      </i>
-                    </span>
-                    <!-- <span class="mx-2"><i class="bi bi-x-square-fill iconDetail"
-                        (click)="categorie(categorie.id)">
-                      </i>
-                    </span> -->
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                <!-- <div *ngIf="acheteurs.length === 0">
+                    <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'acheteurs disponibles pour
+                        l'instant...</p>
+                </div> -->
+
+                <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" class="table row-border hover  w-100" >
+                        <thead class="">
+                            <tr class="titleHead">
+                              <th scope="col">Image</th>
+                              <th scope="col">Nom</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                              <tr class="" *ngFor="let categorie of categories">
+                                <td scope="col"><img src="{{ categorie.image }}" alt="" style="width: 50px; height: 50px;"></td>
+                                <td scope="col">{{ categorie.type }}</td>
+                                <td scope="col">{{ categorie.created_at | date:'dd/MM/yyyy'}}</td>
+                                <td scope="col">
+                                  <span class="mx-2"><i class="bi bi-pencil-square iconDetail" data-bs-toggle="modal"
+                                      data-bs-target="#editcategorieModal" (click)="editcategorieModal(categorie.id)">
+                                    </i>
+                                  </span>
+                                </td>
+                              </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-
-
-
-
-
-
-
+</div>
 
   <!-- les modalles -->
   <!-- debut model d'ajoute d'un categorie dans le blog -->
@@ -154,55 +108,4 @@
   </div>
   <!-- fin du model de modification  -->
   <!-- les modalles -->
-</section>
 
-<div class="py-4 px-4">
-    <h5 class="navTitle"><a href="" routerLink="categories" class="my-3">Liste des categories</a></h5>
-
-    <div class="row .row2 mt-4 shadow rounded-4">
-        <div class="col-12 ">
-            <div class="tableCard py-4 border-0 ">
-
-                <button class="btn mb-4 active">
-                    ajouter une catégorie
-                </button>
-
-                <!-- <div *ngIf="acheteurs.length === 0">
-                    <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'acheteurs disponibles pour
-                        l'instant...</p>
-                </div> -->
-
-                <div class="table-responsive">
-                    <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100">
-                        <thead>
-                            <tr class="text-center titleHead">
-                                <th scope="col">Id</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center">
-                                <td scope="col"></td>
-                                <td scope="col"></td>
-                                <td scope="col"></td>
-                                <td scope="col">
-                                    <span class="mx-2"><i class="fa-solid fa-eye iconDetail" data-bs-toggle="modal"
-                                            data-bs-target="#detailClient">
-                                            <!-- (click)="openAcheteurDetails(acheteur)" -->
-                                        </i>
-                                    </span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill iconDetail">
-                                            <!-- (click)="supprimerAcheteur(acheteur)" -->
-                                        </i>
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

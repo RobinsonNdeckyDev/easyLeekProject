@@ -26,9 +26,31 @@
                     </li>
                 </ul>
 
-                <div class="icons">
-                    <span><a routerLinkActive="activeLink" routerLink="/login"><i class="fa-regular fa-user mx-3"></i></a></span>
-                    <span><a routerLinkActive="activeLink"><i class="bi bi-cart3 mx-3"></i></a></span>
+                <div class="icons d-flex">
+
+                    <div class="dropdown" *ngIf="authService.isLoggedIn()">
+                        <a class="iconpanier" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-user mx-3"> </i>
+                        </a>
+                        <ul class="dropdown-menu droprouge">
+                            <li><a class="dropdown-item" href="#" routerLink="/profil">Mon profil</a></li>
+                            <li><a class="dropdown-item" href="#" (click)="logout()">Deconnexion</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dropdown" *ngIf="!authService.isLoggedIn()">
+                        <a class="iconpanier" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-user mx-3"> </i>
+                        </a>
+                        <ul class="dropdown-menu droprouge">
+                            <li><a class="dropdown-item" href="#" routerLink="/login">Connexion</a></li>
+                        </ul>
+                    </div>
+                    
+                    <span><a routerLinkActive="activeLink" routerLink="/panier"><i class="bi bi-cart3 mx-3 iconpanier"></i></a></span>
+                    <span>        <button (click)="toggleTheme()">Toggle Theme</button>
+                    </span>
+
                 </div>
 
             </div>
@@ -36,9 +58,3 @@
         </div>
     </nav>
 </div>
-
-
-
-
-
-

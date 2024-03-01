@@ -6,11 +6,13 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ContactComponent } from './contact/contact.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { ClientsComponent } from './clients/clients.component';
+import { AdminGuard } from 'src/app/guard/admin.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: MainAdminComponent,
+    canActivate :[AdminGuard],
     children: [
       { path: 'accueilAdmin', component: AccueilAdminComponent },
       { path: 'categories', component: CategoriesComponent },

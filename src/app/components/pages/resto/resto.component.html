@@ -30,15 +30,16 @@
 <!-- banner-img -->
 
 <!-- restaurant à proxi -->
-<div class="container mt-5">
+<div class="container mt-5" *ngIf="DetailPlatidentifier">
     <div class="row justify-content-center text-center mb-2 mb-lg-4">
         <div class="proxiHead">
-            <h4 class="fw-bold text-start">Tous les restaurants à proximité</h4>
+            <h4 class="fw-bold text-start">Tous les restaurants</h4>
             <div class="categorie  w-25">
                 <span class="mx-1">Categorie:</span>
-                <select name="categorie" id="categorie" class="form-select ">
-                    <option value=""></option>
-                    <option value=""></option>
+                <select class="form-select selectc-input" aria-label="Default select example" id="categorie_type"
+                    name="categorie_type" [(ngModel)]="categorie_id" (change)="onRestoChange()" required>
+                    <option value="" selected (click)="getAllRestaurants()">Choisissez un type de categorie</option>
+                    <option *ngFor="let categorie of categories" [value]="categorie.id">{{ categorie.type }}</option>
                 </select>
             </div>
             <div class="search w-25 border">
@@ -48,124 +49,25 @@
         </div>
     </div>
     <div class="row g-3">
-        <div class="col-md-3 p-3">
+        <div class="col-md-3 p-3" *ngFor="let restaurant of restaurants">
             <div class="card shadow p-0 border-0 mb-3">
                 <div class="card-body m-0">
-                    <div class="mb-4"><img class="img-fluid" src="https://freefrontend.dev/assets/square.png"
-                            class="w-100">
+                    <div class="mb-4"><img class="img-fluid" src="{{ restaurant.image }}" class="w-100"
+                            style="width: 200px; height: 200px;">
                     </div>
-                    <div class="d-flex mb-4">
-                        <img src="https://freefrontend.dev/assets/square.png" alt="" class="w-25 h-25">
-                        <p>Maiga chez Mbene</p>
+                    <div class="d-flex mb-1 ">
+                        <p  class="fw-bold">{{ restaurant.name }}</p>
                     </div>
-                    <button class="btn  btn-success">Ouvert</button>
+                    <div class="d-flex ">
+                        <p>{{ restaurant.description }}</p>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn  btndestrucs" (click)="toggleForm(); loadPlats(restaurant.id) ; loadMenus(restaurant.id)">Consulter</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 p-3">
-            <div class="card shadow p-0 border-0 mb-3">
-                <div class="card-body m-0">
-                    <div class="mb-4"><img class="img-fluid" src="https://freefrontend.dev/assets/square.png"
-                            class="w-100">
-                    </div>
-                    <div class="d-flex mb-4">
-                        <img src="https://freefrontend.dev/assets/square.png" alt="" class="w-25 h-25">
-                        <p>Maiga chez Mbene</p>
-                    </div>
-                    <button class="btn  btn-success">Ouvert</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 p-3">
-            <div class="card shadow p-0 border-0 mb-3">
-                <div class="card-body m-0">
-                    <div class="mb-4"><img class="img-fluid" src="https://freefrontend.dev/assets/square.png"
-                            class="w-100">
-                    </div>
-                    <div class="d-flex mb-4">
-                        <img src="https://freefrontend.dev/assets/square.png" alt="" class="w-25 h-25">
-                        <p>Maiga chez Mbene</p>
-                    </div>
-                    <button class="btn  btn-success">Ouvert</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 p-3">
-            <div class="card shadow p-0 border-0 mb-3">
-                <div class="card-body m-0">
-                    <div class="mb-4"><img class="img-fluid" src="https://freefrontend.dev/assets/square.png"
-                            class="w-100">
-                    </div>
-                    <div class="d-flex mb-4">
-                        <img src="https://freefrontend.dev/assets/square.png" alt="" class="w-25 h-25">
-                        <p>Maiga chez Mbene</p>
-                    </div>
-                    <button class="btn  btn-success">Ouvert</button>
-                </div>
-            </div>
-        </div>
-
     </div>
-    <div class="row g-3 mt-2">
-        <div class="col-md-3 p-3">
-            <div class="card shadow p-0 border-0 mb-3">
-                <div class="card-body m-0">
-                    <div class="mb-4"><img class="img-fluid" src="https://freefrontend.dev/assets/square.png"
-                            class="w-100">
-                    </div>
-                    <div class="d-flex mb-4">
-                        <img src="https://freefrontend.dev/assets/square.png" alt="" class="w-25 h-25">
-                        <p>Maiga chez Mbene</p>
-                    </div>
-                    <button class="btn  btn-success">Ouvert</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 p-3">
-            <div class="card shadow p-0 border-0 mb-3">
-                <div class="card-body m-0">
-                    <div class="mb-4"><img class="img-fluid" src="https://freefrontend.dev/assets/square.png"
-                            class="w-100">
-                    </div>
-                    <div class="d-flex mb-4">
-                        <img src="https://freefrontend.dev/assets/square.png" alt="" class="w-25 h-25">
-                        <p>Maiga chez Mbene</p>
-                    </div>
-                    <button class="btn  btn-success">Ouvert</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 p-3">
-            <div class="card shadow p-0 border-0 mb-3">
-                <div class="card-body m-0">
-                    <div class="mb-4"><img class="img-fluid" src="https://freefrontend.dev/assets/square.png"
-                            class="w-100">
-                    </div>
-                    <div class="d-flex mb-4">
-                        <img src="https://freefrontend.dev/assets/square.png" alt="" class="w-25 h-25">
-                        <p>Maiga chez Mbene</p>
-                    </div>
-                    <button class="btn  btn-success">Ouvert</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 p-3">
-            <div class="card shadow p-0 border-0 mb-3">
-                <div class="card-body m-0">
-                    <div class="mb-4"><img class="img-fluid" src="https://freefrontend.dev/assets/square.png"
-                            class="w-100">
-                    </div>
-                    <div class="d-flex mb-4">
-                        <img src="https://freefrontend.dev/assets/square.png" alt="" class="w-25 h-25">
-                        <p>Maiga chez Mbene</p>
-                    </div>
-                    <button class="btn  btn-success">Ouvert</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
     <div class="my-5 d-flex justify-content-center">
         <nav aria-label="...">
             <ul class="pagination">
@@ -186,6 +88,97 @@
 </div>
 <!-- restaurant à proxi -->
 
+<!-- detail des plats -->
+<section class="my-5 border mt-5" *ngIf="!DetailPlatidentifier">
+    <p><i class="bi bi-arrow-left-circle-fill display-4" (click)="toggleForm()"></i></p>
+    <div class="w-100 mx-auto my-4">
+  
+      <!-- ici c'est les plats  -->
+      <div class="d-flex justify-content-between my-4 gap-4">
+        <div>
+          <h4 class="titreDash fw-bold">Titre Restaurant </h4>
+        </div>
+        <div>
+          <div class="d-flex justify-content-around gap-3 me-5">
+            <div>
+              <select class="form-select selectc-input" aria-label="Default select example" (change)="onMenuChange()"
+                [(ngModel)]="selectedMenuId">
+                <option value="" disabled selected>Choisissez un type de menu</option>
+                <option *ngFor="let menu of menus" [value]="menu.id">{{ menu.titre }}</option>
+              </select>
+            </div>
+            <div class="search">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control inputsearchResto" placeholder="rechercher un restaurant">
+                <span class="input-group-text iconsearch" id="basic-addon1"><i class="bi bi-search"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 m-5">
+          <div *ngFor="let plat of plats" class="col">
+            <div class="card rounded rounded-4 cardResto">
+              <div class="rounded rounded-4 w-100  cardRestoEntete d-flex justify-content-center">
+                <img src="{{plat.image}}" width="250px" height="250px"
+                  class="card-img-top border border-2 imagePLat" alt="plat image">
+              </div>
+              <div class="card-body cardBodyResto">
+                <div class="card-title d-flex justify-content-between">
+                  <h5>{{ plat.libelle }}</h5>
+                  <p class="">{{ plat.prix }} fcfa</p>
+                </div>
+                <p class="card-text">{{ plat.descriptif }}</p>
+              </div>
+              <div class="card-footer rounded rounded-4 cardFooterResto d-flex justify-content-end">
+                <button class="boutonCommandeDts rounded rounded-5 px-3" (click)="ajouterAuPanier(plat)">Ajouter <i
+                    class="bi bi-basket"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- commentaite et recaptulatif du panier  -->
+    <div>
+      <!-- carte recaptulatif du panier  -->
+      <div>
+        
+      </div>
+      <!-- carte de commentaire  -->
+      <div>
+      </div>
+    </div>
+  
+  
+    <!-- section de resto avec ces cartes -->
+    <!-- pagination  -->
+    <div class="pagin d-flex justify-content-center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item active"><a class="page-link active">1</a></li>
+          <li class="page-item"><a class="page-link pagi">2</a></li>
+          <li class="page-item"><a class="page-link pagi">3</a></li>
+          <li class="page-item">
+            <a class="page-link" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  
+  </section>
+
+<!-- details des plats  -->
 
 <!-- footer -->
 <app-footer></app-footer>

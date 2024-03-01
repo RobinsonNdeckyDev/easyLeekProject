@@ -21,3 +21,7 @@
 .proxiHead .search span i {
     color: white;
 }
+.btndestrucs{
+    background-color: var(--rose);
+    color: white;
+}

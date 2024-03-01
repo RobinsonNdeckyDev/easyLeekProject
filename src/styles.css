@@ -11,6 +11,16 @@
     --fisa: #F8F3C6;
 }
 
+body {
+    transition: background-color 0.3s ease;
+  }
+  
+  .night-mode {
+    background-color: #212121;
+    color: #fff;
+  }
+  
+
 body,
 html {
     height: 100%;

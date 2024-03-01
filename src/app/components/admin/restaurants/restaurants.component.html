@@ -1,55 +1,46 @@
-<section class="milieuxcontenu">
-<!-- Liste des restaurateurs -->
-<div>
-  <h3 class="text-center mt-2 fw-bold titremere-blog">Listes des restaurants</h3>
-  <div class="d-flex justify-content-between">
-    <button class="btn fw-bold  boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajouterRestaurant">Ajouter restaurant</button>
-    <div class="search">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control inputPorteur" placeholder="Chercher un restaurant">
-        <button class="input-group-text iconsearch" id="basic-addon1"><i class="bi bi-search"></i></button>
+<div class="py-4 px-4">
+  <h5 class="navTitle"><a href="" routerLink="restaurants" class="my-3">Liste des Restaurants</a></h5>
+
+  <div class="row .row2 mt-4 shadow rounded-4">
+    <div class="col-12 ">
+      <div class="tableCard py-4 border-0 ">
+
+        <button class="btn mb-4 active boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajouterRestaurant">
+          ajouter un restaurant
+        </button>
+
+        <!-- <div *ngIf="acheteurs.length === 0">
+                  <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'acheteurs disponibles pour
+                      l'instant...</p>
+              </div> -->
+
+        <div class="table-responsive">
+          <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100">
+            <thead class="">
+              <tr class=" titleHead">
+                <th scope="col">Image</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Date</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="" *ngFor="let restaurateur of restaurateurs">
+                <td scope="col"><img src="{{ restaurateur.image }}" alt="" style="width: 50px; height: 50px;"></td>
+                <td scope="col">{{ restaurateur.name }}</td>
+                <td scope="col">{{ restaurateur.phone}}</td>
+                <td scope="col">
+                  <span class="mx-2"><i class="bi bi-eye iconDetail" data-bs-toggle="modal"
+                      data-bs-target="#detailrestaurateurModal" (click)="getDetailsRestaurant(restaurateur)">
+                    </i>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="d-flex justify-content-center">
-  <!-- <button class="btn fw-bold me-3 boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajoutplat">Liste des Restaurants</button>
-  <button class="btn fw-bold me-3  boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajoutplat">Restaurant Active</button>
-  <button class="btn fw-bold me-3 boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajoutplat">Restaurant Desactiver</button> -->
-</div>
-<div class="card w-75" style="margin-top: 8%; border: 2px solid red; margin-left: 15%; border: 1px solid #F7E801;">
-  <div class="card-body">
-    <table class="table">
-      <thead>
-        <tr>
-          <!-- <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Photo</th> -->
-          <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Nom</th>
-          <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Lieu</th>
-          <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Téléphone</th>
-          <th scope="col" style="background-color: #FFA07A; font-weight: bold;">Action</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let restaurateur of restaurateurs">
-        <tr>
-          <td><img src="http://127.0.0.1:8000/images/{{restaurateur.image}}" alt="" width="50" height="50"></td>
-          <td>{{ restaurateur.name }}</td>
-          <td>{{ restaurateur.adresse }}</td>
-          <td>{{ restaurateur.phone }}</td>
-          <td>
-            <ul class="d-flex list-group list-group-horizontal">
-              <!-- Bouton pour voir les détails -->
-              <li class="list-group-item" data-bs-toggle="modal" data-bs-target="#detailrestaurateurModal" (click)="getDetailsRestaurant(restaurateur)"><i class="bi bi-eye"></i></li>
-              <!-- Bouton pour supprimer le restaurant -->
-              <li class="list-group-item">
-                <!-- <i [class]="restaurateur.isBlocked ? 'bi-unlock' : 'bi-trash3'"></i> -->
-                <!-- <i class="bi bi-person-fill-check"></i>
-                <i class="bi bi-person-fill-lock"></i> -->
-              </li>
-            </ul>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
 
@@ -60,7 +51,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title w-100 fs-4 titreAjout text-center">Ajouter un restaurant</h1>
-        <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i class="bi bi-x-lg"></i></button>
+        <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i
+            class="bi bi-x-lg"></i></button>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="save()">
@@ -87,19 +79,20 @@
           </div>
           <div class="mb-3">
             <label for="descriptionrestaurateur">Description du restaurant:</label>
-            <input class="form-control" type="text" id="descriptionrestaurateur" name="description" [(ngModel)]="description" required>
+            <input class="form-control" type="text" id="descriptionrestaurateur" name="description"
+              [(ngModel)]="description" required>
           </div>
           <div class="mb-4">
             <label for="inputImage" class="form-label">Image du restaurant</label>
             <input type="file" class="form-control" id="inputGroupFile02" name="image" [(ngModel)]="image"
-            (change)="upload($event)" accept="image/*">
+              (change)="upload($event)" accept="image/*">
           </div>
           <div class="mb-3">
             <label for="categorie_type">Type de catégorie:</label>
             <select id="categorie_type" name="categorie_type" [(ngModel)]="categorie_id" required>
               <option *ngFor="let categorie of categories" [value]="categorie.id">{{ categorie.type }}</option>
             </select>
-          </div>     
+          </div>
           <button class="btn btn-add" type="submit">Ajouter</button>
         </form>
       </div>
@@ -107,14 +100,16 @@
   </div>
 </div>
 <!-- ajout restaurateur -->
- <!-- details restaurateur -->
- <!-- Modal pour afficher les détails d'un restaurateur -->
-<div class="modal fade" id="detailrestaurateurModal" tabindex="-1" aria-labelledby="detailrestaurateurModalLabel" aria-hidden="true">
+<!-- details restaurateur -->
+<!-- Modal pour afficher les détails d'un restaurateur -->
+<div class="modal fade" id="detailrestaurateurModal" tabindex="-1" aria-labelledby="detailrestaurateurModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title w-100 fs-4 titreAjout text-center">Détails du restaurateur</h1>
-        <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i class="bi bi-x-lg"></i></button>
+        <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i
+            class="bi bi-x-lg"></i></button>
       </div>
       <div class="modal-body">
         <!-- Affichez ici les détails du restaurateur -->
@@ -138,4 +133,3 @@
   </div>
 </div>
 <!-- details restaurateur -->
-</section>

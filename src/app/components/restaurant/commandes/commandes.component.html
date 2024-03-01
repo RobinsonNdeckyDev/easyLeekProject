@@ -1,42 +1,51 @@
 <div class="py-4 px-4">
-    <h5 class="navTitle"><a href="" routerLink="commandes" class="my-3">Liste des commandes</a></h5>
+    <h5 class="navTitle"><a href="" routerLink="commandes" class="my-3 ">Liste des commandes</a></h5>
 
     <div class="row .row2 mt-4 shadow rounded-4">
         <div class="col-12 ">
             <div class="tableCard py-4 border-0 ">
 
-                <button class="btn mb-4 active">
-                    ajouter une commande
+                <button class="btn mb-4 active" (click)="etatSelectionne = 'acceptee'">
+                    Commande accepter
                 </button>
-
-                <!-- <div *ngIf="acheteurs.length === 0">
-                    <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'acheteurs disponibles pour
-                        l'instant...</p>
-                </div> -->
-
+                <button class="btn mb-4 active" (click)="etatSelectionne = 'refusee'">
+                    Commande refuser
+                </button>
+                <button class="btn mb-4 active" (click)="etatSelectionne = 'terminee'">
+                    Commande terminer
+                </button>
                 <div class="table-responsive">
                     <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100">
                         <thead>
-                            <tr class="text-center titleHead">
-                                <th scope="col">Id</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Date</th>
+                            <tr class=" titleHead">
+                                <th scope="col">Client</th>
+                                <th scope="col">Plat</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Nombre de plat</th>
+                                <th scope="col">Lieux</th>
+                                <th scope="col">Etat</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
-                                <td scope="col"></td>
-                                <td scope="col"></td>
-                                <td scope="col"></td>
+                            <tr class="" *ngFor="let commande of filterCommandesByEtat(etatSelectionne)"
+                                [hidden]="etatSelectionne !== 'tous' && commande.etatCommande !== etatSelectionne">
+                                <td scope="col">{{ commande.user.name }}</td>
+                                <td scope="col">{{ commande.nomPlat }}</td>
+                                <td scope="col">{{ commande.prixCommande }} fcfa</td>
+                                <td scope="col">{{ commande.nombrePlats }} plats</td>
+                                <td scope="col">{{ commande.lieuLivraison }}</td>
+                                <td scope="col">{{ commande.etatCommande }}</td>
                                 <td scope="col">
-                                    <span class="mx-2"><i class="fa-solid fa-eye iconDetail" data-bs-toggle="modal"
-                                            data-bs-target="#detailClient">
-                                            <!-- (click)="openAcheteurDetails(acheteur)" -->
+                                    <span class="mx-2"><i class="bi bi-pencil-square iconDetail" data-bs-toggle="modal"
+                                            data-bs-target="#modifierCommande" (click)="detailCommande(commande.id)">
                                         </i>
                                     </span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill iconDetail">
-                                            <!-- (click)="supprimerAcheteur(acheteur)" -->
+                                    <span class="mx-2"><i class="bi bi-truck iconDetail" (click)="termine(commande.id)">
+                                        </i>
+                                    </span>
+                                    <span class="mx-2"><i class="bi bi-x-octagon iconDetail"
+                                            (click)="annulerCommande(commande.id)">
                                         </i>
                                     </span>
                                 </td>

@@ -1,0 +1,163 @@
+<app-navbar></app-navbar>
+<div class="row">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="heading-title">
+                    <h2>Mon profil</h2>
+                </div>
+            </div>
+            <div class="col-lg-12"></div>
+            <div class="col-lg-12">
+                <div class="my-profile-head">
+                    <div class="profile-img-main">
+                        <div class="profile-img"></div>
+                    </div>
+                    <div class="my-profile-detail">
+                        <div class="my-profile-info">
+                            <h3>{{ name }}</h3>
+                            <p class="rtl-num-cod">
+                                <i class="iicon-icon-35"></i> {{ phone }}
+                            </p>
+                        </div>
+                        <div class="edit-pro-btn">
+                            <button class="btn me-5" data-toggle="modal" data-target="#edit-profile">
+                                Editer le profil
+                            </button>
+                            <button class="btn btn-danger me-5" (click)="logout()">
+                                Déconnexion
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="profile_page_content">
+            <div class="col-xl-3 col-lg-4">
+                <div class="sidebar-menu-main">
+                    <div class="sidebar-menu">
+                        <div class="ordering-title">
+                            <h6>Commande</h6>
+                        </div>
+
+                        <ul class="nav nav-tabs">
+                            <li class="tabs active">
+                                <a>Historique des commandes</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-8">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active show">
+                        <div class="profile-content-area">
+                            <div class="profile-page-title">
+                                <h5>Historique des commandes</h5>
+
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active"
+                                            (click)="showTemplate1() ; etatSelectionne = 'acceptee'">Commandes en
+                                            cours</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                            (click)="showTemplate2(); etatSelectionne = 'terminee'">Commandes
+                                            passées</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                            (click)="showTemplate3() ; etatSelectionne = 'refusee'">Commandes
+                                            refusées</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <ng-container
+                                *ngIf="currentTemplate === 'template1'; then template1 else (currentTemplate === 'template2' ? template2 : template3)"></ng-container>
+                            <ng-template #template1>
+                                <div class="profile-content-main">
+                                    <div class="tab-content">
+                                        <div>
+                                            <div class="table-responsive">
+                                                <table datatable class="table row-border hover  w-100">
+                                                    <thead class="">
+                                                        <tr class="titleHead">
+                                                            <th scope="col">Nom du plat</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Prix</th>
+                                                            <th scope="col">Etat</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="Commandes.length > 0; else noCommands">
+                                                        <tr class="" *ngFor="let commande of Commandes">
+                                                            <td scope="col">{{ commande.nomPlat }}</td>
+                                                            <td scope="col">{{ commande.created_at | date:'dd/MM/yyyy'}}
+                                                            </td>
+                                                            <td scope="col">{{ commande.prixCommande }}</td>
+                                                            <td scope="col">{{ commande.etatCommande }}</td>
+
+                                                            <td scope="col">
+                                                                <span class="mx-2"><i
+                                                                        class="bi bi-pencil-square iconDetail"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#editmenuModal"
+                                                                        (click)="voirDetails(commande.id)">
+                                                                    </i>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <ng-template #noCommands>
+                                                <div>
+                                                    <figure>
+                                                        <img src="/assets/imageplatvide.png" alt="je suis l'image " />
+                                                    </figure>
+                                                    <p class="no-found">Aucune commande passée trouvée.</p>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                            <ng-template #template2>
+                                <div *ngIf="Commandes.length > 0; else noCommands">
+                                    <p>Contenu du template 2</p>
+                                </div>
+                                <ng-template #noCommands>
+                                    <div class="mx-auto">
+                                        <figure>
+                                            <img src="/assets/imageplatvide.png" alt="je suis l'image " />
+                                        </figure>
+                                        <p class="no-found">Aucune commande passée trouvée.</p>
+                                    </div>
+                                </ng-template>
+                            </ng-template>
+                            <ng-template #template3>
+                                <div *ngIf="Commandes.length > 0; else noCommands">
+                                    <p>Contenu du template 3</p>
+                                </div>
+                                <ng-template #noCommands>
+                                    <div class="mx-auto">
+                                        <figure>
+                                            <img src="/assets/imageplatvide.png" alt="je suis l'image " />
+                                        </figure>
+                                        <p class="no-found">Aucune commande passée trouvée.</p>
+                                    </div>
+                                </ng-template>
+                            </ng-template>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

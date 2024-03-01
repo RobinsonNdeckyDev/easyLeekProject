@@ -32,7 +32,7 @@
         <div class="row">
           <div class="col-12 col-md-4" *ngFor="let plat of plats">
             <div class="card border mb-2 rounded-4">
-              <img src="{{plat.image}}" class="img-fluid imagePLat" alt="Image article">
+              <img src="{{plat.image}}" class="imagePLat" style="width: 200px; height: 200px;" alt="Image article">
               <div class="bodyArticle px-4">
                 <h3 class="mt-3 text-center">{{ plat.libelle }}</h3>
                 <p class="limited-height">{{ plat.descriptif }}</p>

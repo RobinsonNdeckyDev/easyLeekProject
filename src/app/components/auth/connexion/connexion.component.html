@@ -1,100 +1,156 @@
+<!-- login.component.html -->
+
 <div class="container container-fluid shadow-lg border-black" [class.sign-up-mode]="!isSignIn">
-    <div class="forms-container">
-        <div class="signin-signup">
-            <!-- debut connexion -->
-            <form *ngIf="isSignIn" class="sign-in-form">
-                <!-- (ngSubmit)="login()" -->
-                <h2 class="title">Se connecter</h2>
-                <label for="">Entre votre Email</label>
-                <div class="input-field">
-                    <i class="fas fa-user"></i>
-                    <input type="email" placeholder="Veuillez entrer votre mail" [(ngModel)]="email" name="email"
-                        required />
-                </div>
-                <label for="">Entre votre mot de passe</label>
-                <div class="input-field">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Veuillez entrer votre mot de passe" [(ngModel)]="password"
-                        name="password" />
-                </div>
-                <input type="submit" value="Se connecter" class="btn solid" />
-            </form>
-            <!-- fin connexion -->
-            <!-- debut inscription -->
-            <form *ngIf="!isSignIn" class="sign-up-form">
-                <!-- (ngSubmit)="onRegister()" -->
-                <!-- <h2 class="title">S'inscrire</h2> -->
-                <label for="">Votre Nom complet</label>
-                <div class="input-field">
-                    <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Nom" [(ngModel)]="username" name="username" />
-                </div>
-                <label for="">Votre Email</label>
-                <div class="input-field">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Email" [(ngModel)]="registerEmail" name="registerEmail" />
-                </div>
-                <label for="">Votre Address</label>
-                <div class="input-field">
-                    <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Address" [(ngModel)]="adresse" name="adresse" />
-                </div>
-                <label for="">Votre Telephone</label>
-                <div class="input-field">
-                    <i class="fas fa-user"></i>
-                    <input type="number" placeholder="Numero de telephone" [(ngModel)]="phone" name="phone" />
-                </div>
-                <label for="">Votre Mot de passe</label>
-                <div class="input-field">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" [(ngModel)]="registerPassword"
-                        name="registerPassword" />
-                </div>
-                <input type="submit" class="btn" value="S'inscrire" />
-            </form>
-            <!-- fin inscription -->
+  <div class="forms-container">
+    <div class="signin-signup">
+      <!-- debut connexion -->
+      <form *ngIf="isSignIn" class="sign-in-form" (ngSubmit)="login()">
+        <h2 class="title">Se connecter</h2>
+        <div>
+          <label for="email">Entre votre Email</label>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="email" placeholder="Veuillez entrer votre mail" [(ngModel)]="email" name="email" required
+              (input)="validateEmail()">
+            <span *ngIf="emailTouched && emailEmpty && !validationMessages['email']" class="text-danger">
+              L'email est requis
+            </span>
+            <span *ngIf="validationMessages['email']" class="text-danger">{{ validationMessages['email'] }}</span>
+            <span *ngIf="!validationMessages['email'] && email" class="text-success">Correct</span>
+          </div>
         </div>
+        <div>
+          <label for="password">Entre votre mot de passe</label>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Veuillez entrer votre mot de passe" [(ngModel)]="password"
+              name="password" (input)="validatePassword()">
+            <span *ngIf="passwordTouched && passwordEmpty && !validationMessages['password']" class="text-danger">
+              Le mot de passe est requis
+            </span>
+            <span *ngIf="validationMessages['password']" class="text-danger">{{ validationMessages['password'] }}</span>
+            <span *ngIf="!validationMessages['password'] && password" class="text-success">Correct</span>
+          </div>
+        </div>
+        <div>
+          <input type="submit" value="Se connecter" class="btn solid" />
+        </div>
+      </form>
+      <!-- fin connexion -->
+      <!-- debut inscription -->
+      <form *ngIf="!isSignIn" class="sign-up-form" (ngSubmit)="onRegister()">
+        <!-- <h2 class="title">S'inscrire</h2> -->
+        <div>
+          <label for="username">Votre Nom complet</label>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Nom" [(ngModel)]="username" name="username" (input)="validatePrenom()">
+            <span *ngIf="prenomTouched && prenomEmpty && !validationMessages['prenom']" class="text-danger">
+              Le nom est requis
+            </span>
+            <span *ngIf="validationMessages['prenom']" class="text-danger">{{ validationMessages['prenom'] }}</span>
+            <span *ngIf="!validationMessages['prenom'] && username" class="text-success">Correct</span>
+          </div>
+        </div>
+        <div>
+          <label for="email">Votre Email</label>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Email" [(ngModel)]="registerEmail" name="registerEmail"
+              (input)="validateEmail()">
+            <span *ngIf="emailTouched && emailEmpty && !validationMessages['email']" class="text-danger">
+              L'email est requis
+            </span>
+            <span *ngIf="validationMessages['email']" class="text-danger">{{ validationMessages['email'] }}</span>
+            <span *ngIf="!validationMessages['email'] && email" class="text-success">Correct</span>
+          </div>
+        </div>
+        <div>
+          <label for="address">Votre Address</label>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Address" [(ngModel)]="adresse" name="adresse" (input)="validateAdresse()">
+            <span *ngIf="adresseTouched && adresseEmpty && !validationMessages['adresse']" class="text-danger">
+              L'address est requis
+            </span>
+            <span *ngIf="validationMessages['adresse']" class="text-danger">{{ validationMessages['adresse'] }}</span>
+            <span *ngIf="!validationMessages['adresse'] && adresse" class="text-success">Correct</span>
+          </div>
+        </div>
+        <div>
+          <label for="phone">Votre Telephone</label>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="number" placeholder="Numero de telephone" [(ngModel)]="phone" name="phone"
+              (input)="validateTelephone()">
+            <span *ngIf="telephoneTouched && telephoneEmpty && !validationMessages['telephone']" class="text-danger">
+              Le prénom est requis
+            </span>
+            <span *ngIf="validationMessages['telephone']" class="text-danger">{{ validationMessages['telephone']
+              }}</span>
+            <span *ngIf="!validationMessages['telephone'] && phone" class="text-success">Correct</span>
+          </div>
+        </div>
+        <div>
+          <label for="password">Votre Mot de passe</label>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" [(ngModel)]="registerPassword" name="registerPassword"
+              (input)="validatePassword()">
+            <span *ngIf="passwordTouched && passwordEmpty && !validationMessages['password']" class="text-danger">
+              Le prénom est requis
+            </span>
+            <span *ngIf="validationMessages['password']" class="text-danger">{{ validationMessages['password'] }}</span>
+            <span *ngIf="!validationMessages['password'] && password" class="text-success">Correct</span>
+          </div>
+        </div>
+        <div>
+          <input type="submit" class="btn" value="S'inscrire" />
+        </div>
+      </form>
+      <!-- fin inscription -->
+    </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <div class="left-panel-content">
+          <div *ngIf="isSignIn">
+            <p><img style="width: 60px;" routerLink="/accueil" src="/assets/logo/logo.png" alt=""></p>
+            <h3>Nouveau ici ?</h3>
+          </div>
+          <p *ngIf="isSignIn">
+            Merci de vous inscrire, votre participation est cruciale pour améliorer notre plateforme et offrir une
+            expérience optimale à chacun.
+          </p>
+          <button class="btn transparent" (click)="toggleForm()">
+            S'inscrire
+          </button>
+          <img src="../../../assets/drawconnexion.png" alt="" class="image">
+        </div>
+      </div>
     </div>
 
-    <div class="panels-container">
-        <div class="panel left-panel">
-            <div class="content">
-                <div class="left-panel-content">
-                    <div *ngIf="isSignIn">
-                        <p><img style="width: 60px;" routerLink="/accueil" src="/assets/logoE.png" alt=""></p>
-                        <h3>Nouveau ici ?</h3>
-                    </div>
-                    <p *ngIf="isSignIn">
-                        Merci de vous inscrire, votre participation est cruciale pour améliorer notre plateforme et
-                        offrir une expérience optimale à chacun.
-                    </p>
-                    <button class="btn transparent" (click)="toggleForm()">
-                        S'inscrire
-                    </button>
-                    <img src="../../../assets/drawconnexion.png" alt="" class="image">
-                </div>
+    <div class="panel right-panel">
+      <div class="content">
+        <div class="right-panel-content">
+          <div>
+            <div *ngIf="!isSignIn">
+              <p><img style="width: 60px;" routerLink="/accueil" src="/assets/logo/logo.png" alt=""></p>
+              <h3>Avez-vous un compte</h3>
             </div>
+            <p *ngIf="!isSignIn">
+              Votre fidélité contribue à l'amélioration constante de nos services pour vous offrir une expérience
+              toujours plus satisfaisante.
+            </p>
+            <button class="btn transparent" (click)="toggleForm()">
+              Se connecter
+            </button>
+          </div>
+          <img src="../../../assets/drawinscrire.png" alt="" class="image">
         </div>
-
-        <div class="panel right-panel">
-            <div class="content">
-                <div class="right-panel-content">
-                    <div>
-                        <div *ngIf="!isSignIn">
-                            <p><img style="width: 60px;" routerLink="/accueil" src="/assets/logoE.png" alt=""></p>
-                            <h3>Avez-vous un compte</h3>
-                        </div>
-                        <p *ngIf="!isSignIn">
-                            Votre fidélité contribue à l'amélioration constante de nos services pour vous offrir une
-                            expérience toujours plus satisfaisante.
-                        </p>
-                        <button class="btn transparent" (click)="toggleForm()">
-                            Se connecter
-                        </button>
-                    </div>
-                    <img src="../../../assets/drawinscrire.png" alt="" class="image">
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
