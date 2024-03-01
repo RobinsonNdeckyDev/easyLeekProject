@@ -6,9 +6,10 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
-  styleUrls: ['./restaurants.component.css']
+  styleUrls: ['./restaurants.component.css'],
 })
 export class RestaurantsComponent {
+  dtOptions: DataTables.Settings = {};
 
   restaurateurs: any[] = [];
   detailrestaurateur: any = {};
