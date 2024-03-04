@@ -11,12 +11,12 @@
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="email" placeholder="Veuillez entrer votre mail" [(ngModel)]="email" name="email" required
-              (input)="validateEmail()">
-            <span *ngIf="emailTouched && emailEmpty && !validationMessages['email']" class="text-danger">
+              (input)="validateEmail()"><br>
+            <p *ngIf="emailTouched && emailEmpty && !validationMessages['email']" class="text-danger">
               L'email est requis
-            </span>
-            <span *ngIf="validationMessages['email']" class="text-danger">{{ validationMessages['email'] }}</span>
-            <span *ngIf="!validationMessages['email'] && email" class="text-success">Correct</span>
+            </p>
+            <p *ngIf="validationMessages['email']" class="text-danger">{{ validationMessages['email'] }}</p>
+            <p *ngIf="!validationMessages['email'] && email" class="text-success">Correct</p>
           </div>
         </div>
         <div>
@@ -24,7 +24,7 @@
           <div class="input-field">
             <i class="fas fa-lock"></i>
             <input type="password" placeholder="Veuillez entrer votre mot de passe" [(ngModel)]="password"
-              name="password" (input)="validatePassword()">
+              name="password" (input)="validatePassword()"><br>
             <span *ngIf="passwordTouched && passwordEmpty && !validationMessages['password']" class="text-danger">
               Le mot de passe est requis
             </span>

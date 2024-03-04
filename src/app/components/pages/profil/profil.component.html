@@ -21,12 +21,9 @@
                             </p>
                         </div>
                         <div class="edit-pro-btn">
-                            <button class="btn me-5" data-toggle="modal" data-target="#edit-profile">
-                                Editer le profil
-                            </button>
-                            <button class="btn btn-danger me-5" (click)="logout()">
-                                Déconnexion
-                            </button>
+                            <button class="btn btnMdf" data-bs-toggle="modal" data-bs-target="#mdfInfoAdmin" (click)="openEditModal()"> Editer le
+                                profil</button>
+
                         </div>
                     </div>
                 </div>
@@ -39,7 +36,6 @@
                         <div class="ordering-title">
                             <h6>Commande</h6>
                         </div>
-
                         <ul class="nav nav-tabs">
                             <li class="tabs active">
                                 <a>Historique des commandes</a>
@@ -157,6 +153,55 @@
 
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mdfInfoAdmin" tabindex="-1" aria-labelledby="mdfInfoAdminLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-center fw-bold mdfAdminForm w-100">Modification profil</h3>
+                <button type="button" class="btn btnCloseAdmin" data-bs-dismiss="modal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Add [(ngModel)] to bind input fields to component variables -->
+                <form (submit)="modifyProfile(user)">
+                    <div class="mb-3">
+                        <label for="nomCompletAdmin" class="col-form-label">Nom complet:</label>
+                        <input type="text" class="form-control border border-danger" id="nomCompletAdmin" name="name"
+                            [(ngModel)]="modifiedName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="emailAdmin" class="col-form-label">Email:</label>
+                        <input type="text" class="form-control border border-danger" id="emailAdmin" name="email"
+                            [(ngModel)]="modifiedEmail">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="telephoneAdmin" class="col-form-label">Téléphone:</label>
+                        <input type="text" class="form-control border border-danger" id="telephoneAdmin" name="phone"
+                            [(ngModel)]="modifiedPhone">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="col-form-label">Mot de passe:</label>
+                        <input type="password" class="form-control border border-danger" id="password" name="password"
+                            [(ngModel)]="modifiedPassword">
+                    </div>
+
+                    <div class="modal-footer d-flex justify-content-between border-0">
+                        <button type="submit" class="btn btnMdf px-3 text-white bg-black"
+                            (click)="modifyProfile(user)">Modifier</button>
+                        <button type="button" class="btn btnReturn px-3 text-white bg-black"
+                            data-bs-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

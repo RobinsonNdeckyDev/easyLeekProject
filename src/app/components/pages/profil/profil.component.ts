@@ -12,6 +12,12 @@ export class ProfilComponent {
   currentTemplate = 'template1';
   etatSelectionne: string = 'acceptee';
   dtOptions: DataTables.Settings = {};
+  modifiedName: any;
+  modifiedEmail: any;
+  modifiedPassword: any;
+  modifiedPhone: any;
+  user :any []=[];
+  password: any;
 
 
   constructor(private authService: AuthService
@@ -92,6 +98,42 @@ export class ProfilComponent {
   filterCommandesByEtat(etat: string): any[] {
     return this.Commandes.filter((commande) => commande.etatCommande === etat);
   }
+
+  openEditModal(): void {
+    // Charger les informations de l'utilisateur actuel dans les champs du formulaire
+
+    this.modifiedName = this.name;
+    console.log("object", this.name);
+    this.modifiedEmail = this.email;
+    this.modifiedPhone = this.phone;
+    this.modifiedPassword = this.password;  // Réinitialiser le champ du mot de passe si nécessaire
+  }
+  modifyProfile(userId: any) {
+    const modifiedProfile = {
+      name: this.modifiedName,
+      email: this.modifiedEmail,
+      phone: this.modifiedPhone,
+      password: this.modifiedPassword // You may want to handle password modifications securely
+    };
+  
+    this.userService.modifyUserProfile(userId, modifiedProfile).subscribe(
+      (response) => {
+        console.log('Profile updated successfully:', response);
+        // Update the user profile in the component
+        this.name = this.modifiedName;
+        this.email = this.modifiedEmail;
+        this.phone = this.modifiedPhone;
+        // Optionally, you can close the modal or perform any other actions
+        // $('#mdfInfoAdmin').modal('hide');
+      },
+      (error) => {
+        // Handle error, maybe show an error message
+        console.error('Error updating profile:', error);
+      }
+    );
+  }
+  
+  
 }
 
 

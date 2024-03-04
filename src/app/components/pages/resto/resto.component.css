@@ -25,3 +25,14 @@
     background-color: var(--rose);
     color: white;
 }
+/* Pagination styles */
+.pagin .pagination .page-link {
+    color: var(--rose);
+  }
+  
+  .pagin .pagination .page-item.active .page-link {
+    background-color: var(--rose);
+    border-color: var(--rose);
+    color: white;
+  }
+  

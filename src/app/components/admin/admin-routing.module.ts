@@ -7,6 +7,7 @@ import { ContactComponent } from './contact/contact.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { ClientsComponent } from './clients/clients.component';
 import { AdminGuard } from 'src/app/guard/admin.guard';
+import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'clients', component: ClientsComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'restaurants', component: RestaurantsComponent },
+      { path: 'profilAdmin', component: ProfilAdminComponent },
       { path: '', redirectTo: 'accueilAdmin', pathMatch: 'full' },
     ],
   },

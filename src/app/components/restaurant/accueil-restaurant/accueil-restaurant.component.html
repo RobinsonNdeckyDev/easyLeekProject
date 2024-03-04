@@ -1,11 +1,109 @@
-<div class="folder-card">
-    <div class="folder-header d-flex">
-        <div class="folder-headerun w-25"></div>
-        <div class="folder-headerdeux w-75"></div>
+<div class="row row1 mt-4 g-4">
+    <div class="col-12 col-md-4" >
+        <div class="card border-0 shadow">
+            <div class="cardImg">
+                <img src="../../../../assets/images/imgCard.png" class="img-fluid" alt="">
+            </div>
+            <div class="cardLogo s">
+                <span class="text-light">
+                    <img src="assets/TypeDeResto/dibi.jpg" alt="">
+                </span>
+            </div>
+            <div class="cardBody d-flex justify-content-between">
+                <span>
+                    Menus
+                </span>
+                <span>
+                    {{nombreMenu}}
+                </span>
+            </div>
+        </div>
     </div>
-    <div class="folder-content">
-        <h2>Titre de la Carte</h2>
-        <p>Votre contenu de carte ici...</p>
+
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow">
+            <div class="cardImg">
+                <img src="" class="img-fluid" alt="">
+            </div>
+            <div class="cardLogo shadow">
+                <span class="text-light">
+                    <img src="assets/TypeDeResto/image_ourChef.png" alt="">
+                </span>
+            </div>
+            <div class="cardBody d-flex justify-content-between">
+                <span>
+                    Plats
+                </span>
+                <span>
+                    {{nombrePlats}}
+                </span>
+            </div>
+        </div>
     </div>
-    <div class="folder-corner"></div>
+
+    <div class="col-12 border-0 col-md-4">
+        <div class="card shadow">
+            <div class="cardImg">
+                <img src="../../../../assets/images/imgCard.png" class="img-fluid" alt="">
+            </div>
+            <div class="cardLogo shadow">
+                <span class="text-light">
+                    <img src="../../../../assets/images/iconUtilitaire.png" alt="">
+                </span>
+            </div>
+            <div class="cardBody d-flex justify-content-between">
+                <span>
+                    Commandes
+                </span>
+                <span>
+                    {{nombreCommande}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row2 mt-2 g-4">
+    <div class="col-12 col-md-12">
+        <div class="card tableCard py-4 shadow border-0 px-4 table-responsive">
+            <p class="mb-2 px-2 mt-1 fs-4 text fw-bold">Liste des commandes</p>
+
+            <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="plats">
+                <thead>
+                    <tr class="titleHead">
+                        <th scope="col">Nom Et lieu</th>
+                        <th scope="col">Nom plat</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Etat</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <div *ngIf="commandes.length === 0">
+                        <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas de commandes disponibles pour
+                            l'instant...</p>
+                    </div>
+                    
+                    <tr class="text-center" *ngFor="let commande of commandes">
+                        <td>{{ commande.user.name }} , {{ commande.lieuLivraison }}</td>
+                        <td>{{ commande.nomPlat }}</td>
+                        <td>{{ commande.prixCommande }}</td>
+                        <td>{{ commande.etatCommande }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- <div class="col-12 col-md-4">
+        <div class="card cardStatistique shadow">
+            <div class="cardImgStat">
+                <img src="../../../../assets/images/imgCard.png" class="img-fluid" alt="">
+            </div>
+            <div class="cardBodyStaT py-3">
+                <h2 class="text-center mb-3">Statistique</h2>
+                <canvas id="MonChart">{{ chart }}</canvas>
+            </div>
+        </div>
+    </div> -->
 </div>

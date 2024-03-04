@@ -1,1 +1,109 @@
-<p>accueil-admin works!</p>
+<div class="row row1 mt-4 g-4">
+    <div class="col-12 col-md-4" >
+        <div class="card border-0 shadow">
+            <div class="cardImg">
+                <img src="../../../../assets/images/imgCard.png" class="img-fluid" alt="">
+            </div>
+            <div class="cardLogo s">
+                <span class="text-light">
+                    <img src="assets/TypeDeResto/dibi.jpg" alt="">
+                </span>
+            </div>
+            <div class="cardBody d-flex justify-content-between">
+                <span>
+                    Client
+                </span>
+                <span>
+                    {{nombreClient}}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow">
+            <div class="cardImg">
+                <img src="" class="img-fluid" alt="">
+            </div>
+            <div class="cardLogo shadow">
+                <span class="text-light">
+                    <img src="assets/TypeDeResto/image_ourChef.png" alt="">
+                </span>
+            </div>
+            <div class="cardBody d-flex justify-content-between">
+                <span>
+                    Restaurant
+                </span>
+                <span>
+                    {{nombreResto}}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 border-0 col-md-4">
+        <div class="card shadow">
+            <div class="cardImg">
+                <img src="../../../../assets/images/imgCard.png" class="img-fluid" alt="">
+            </div>
+            <div class="cardLogo shadow">
+                <span class="text-light">
+                    <img src="../../../../assets/images/iconUtilitaire.png" alt="">
+                </span>
+            </div>
+            <div class="cardBody d-flex justify-content-between">
+                <span>
+                    Categorie
+                </span>
+                <span>
+                    {{nombreCategorie}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row2 mt-2 g-4">
+    <div class="col-12 col-md-12">
+        <div class="card tableCard py-4 shadow border-0 px-4 table-responsive">
+            <p class="mb-2 px-2 mt-1 fs-4 text fw-bold">Liste des messages</p>
+
+            <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100" *ngIf="messages">
+                <thead>
+                    <tr class="titleHead">
+                        <th scope="col">Nom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <div *ngIf="messages.length === 0">
+                        <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas de messages disponibles pour
+                            l'instant...</p>
+                    </div>
+                    
+                    <tr class="text-center" *ngFor="let message of messages">
+                        <td>{{ message.name }}</td>
+                        <td>{{ message.email }}</td>
+                        <td>{{ message.message }}</td>
+                        <td>{{ message.updated_at | date:'dd/MM/yyyy' }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- <div class="col-12 col-md-4">
+        <div class="card cardStatistique shadow">
+            <div class="cardImgStat">
+                <img src="../../../../assets/images/imgCard.png" class="img-fluid" alt="">
+            </div>
+            <div class="cardBodyStaT py-3">
+                <h2 class="text-center mb-3">Statistique</h2>
+                <canvas id="MonChart">{{ chart }}</canvas>
+            </div>
+        </div>
+    </div> -->
+</div>

@@ -12,6 +12,7 @@ import { CommandesComponent } from './commandes/commandes.component';
 import { AvisComponent } from './avis/avis.component';
 import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
+import { ProfilRestoComponent } from './profil-resto/profil-resto.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DataTablesModule } from 'angular-datatables';
     MenusComponent,
     PlatsComponent,
     CommandesComponent,
-    AvisComponent
+    AvisComponent,
+    ProfilRestoComponent
   ],
   imports: [
     CommonModule,

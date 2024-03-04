@@ -13,6 +13,9 @@ export class CommandesComponent {
   platId :string="";
 nomPlat: any;
 commande: any;
+image :string="";
+prix :any ="";
+descriptif :string="";
 
   ngOnInit(): void {
     this.dtOptions = {

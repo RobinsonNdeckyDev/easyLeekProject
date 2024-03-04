@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/Services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-
+users :any []= [];
   constructor(private authService: AuthService){}
   @Output() toggleSidebarEvent = new EventEmitter<void>();
 

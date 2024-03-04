@@ -7,6 +7,7 @@ import { CommandesComponent } from './commandes/commandes.component';
 import { MenusComponent } from './menus/menus.component';
 import { PlatsComponent } from './plats/plats.component';
 import { RestaurantGuard } from 'src/app/guard/restaurant.guard';
+import { ProfilRestoComponent } from './profil-resto/profil-resto.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'commandes', component: CommandesComponent },
       { path: 'menus', component: MenusComponent },
       { path: 'plats', component: PlatsComponent },
+      { path: 'profilResto', component: ProfilRestoComponent },
       { path: '', redirectTo: 'accueilRestaurant', pathMatch: 'full' },
     ],
   },

@@ -1,0 +1,89 @@
+
+<div class="card p-4 shadow">
+    <div class="row container">
+        <div class="col-12 col-md-4 py-2">
+            <div class="profilBailleur border p-0">
+                <!-- <div class="rect rect1"></div> -->
+                <img class="imgAdmin img-fluid w-100" src="assets/TypeDeResto/dibi.jpg" alt="">
+                <!-- <div class="rect rect2"></div> -->
+            </div>
+        </div>
+        <div class="col-12 col-md-8 px-5 position-relative">
+            <h3 class="text-center titreAdmin fw-bold mt-5">Profil Admin</h3>
+            <div class="infoAdmin d-flex flex-column justify-content-between">
+                <div class="name mb-5">
+                    <h2 class="nomAdmin">Yaye Diaw</h2>
+                </div>
+                
+                <div class="coods mb-5">
+                    <h4 class="fw-bold coordsAdmin">Coordonnées:</h4>
+                    <p><i class="bi bi-envelope-fill"></i> andrendione@gmail.com</p>
+                    <p><i class="bi iconAdmin bi-telephone-fill"></i> 78 345 76 65</p>
+                </div>
+            </div>
+
+            <div class="buttonsaction d-flex justify-content-between">
+                <button class="btn btnMdf" data-bs-toggle="modal" data-bs-target="#mdfInfoAdmin">Modifier</button>
+                <!-- <button class="btn btnReturn"><a routerLink="/dashboard"></a>Retour</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal Mdf Admin -->
+<div class="modal fade" id="mdfInfoAdmin" tabindex="-1" aria-labelledby="mdfInfoAdminLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="text-center fw-bold mdfAdminForm w-100">Modification profil Admin</h3>
+            <button type="button" class="btn btnCloseAdmin" data-bs-dismiss="modal">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                    <label for="imgAdmin" class="col-form-label">Image:</label>
+                    <input type="text" class="form-control border border-danger" id="imgAdmin"
+                        placeholder="photo de profil">
+                </div>
+
+                <div class="mb-3">
+                    <label for="nomCompletAdmin" class="col-form-label">Nom complet:</label>
+                    <input type="text" class="form-control border border-danger" id="nomCompletAdmin" placeholder="André Ndione">
+                </div>
+
+                <div class="mb-3">
+                    <label for="emailAdmin" class="col-form-label">Email:</label>
+                    <input type="text" class="form-control border border-danger" id="emailAdmin" placeholder="andrendione@gmail.com">
+                </div>
+
+                <div class="mb-3">
+                    <label for="telephoneAdmin" class="col-form-label">Téléphone:</label>
+                    <input type="text" class="form-control border border-danger" id="telephoneAdmin" placeholder="78 345 67 21">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-between border-0">
+            <button type="button" class="btn btnMdf px-3 text-white">Modifier</button>
+            <button type="button" class="btn btnReturn px-3 text-white"
+                data-bs-dismiss="modal">
+                annuler
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+

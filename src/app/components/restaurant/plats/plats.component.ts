@@ -39,11 +39,8 @@ export class PlatsComponent {
   Commandes: any[] = [];
   // ajoutArticle!: FormGroup;
   constructor(
-    private platservice: GestionPlatService,
-    private recupererMenu: PlatService,
-    private commandeService: CommandeService,
-    private storage: AngularFireStorage
-  ) {}
+    private platservice: GestionPlatService, private recupererMenu: PlatService, private commandeService: CommandeService, private storage: AngularFireStorage
+  ) { }
 
   ngOnInit(): void {
     this.loadPlats();
@@ -108,16 +105,16 @@ export class PlatsComponent {
     this.platservice.ajouterPlat(newPlat).subscribe(
       (response) => {
         console.log('response après ajout du plat: ', response);
-        this.plats=response
+        this.plats = response
         this.loadPlats()
-        
+
       },
       (error) => {
         console.log(error);
       }
     );
   }
-  
+
   onMenuChange() {
     this.loadPlatsForSelectedMenu();
   }
@@ -148,19 +145,37 @@ export class PlatsComponent {
       );
     }
   }
-  supprimerPlat(platId: string): void {
-    {
-      this.platservice.deletePlat(platId).subscribe(
+  archiver(platId: number): void {
+    this.platservice.archiver(platId).subscribe(
         (response) => {
-          // console.log('Plat supprimé avec succès!', response);
-          this.loadPlatsForSelectedMenu();
+            console.log('reponse du .', response);
+            this.loadPlatsForSelectedMenu();
         },
-        (error) => {
-          console.error('Erreur lors de la suppression du plat :', error);
-        }
-      );
-    }
+    );
+}
+showArchivedPlats(): void {
+  this.platservice.getArchivedPlats().subscribe(
+      (archivedPlats) => {
+          console.log('Archived plats retrieved successfully.', archivedPlats);
+          this.plats = archivedPlats; // Assuming plats is your array holding dishes
+      },
+      (error) => {
+          console.error('Error retrieving archived plats:', error);
+      }
+  );
+}
+  supprimerPlat(platId: string): void {
+    this.platservice.deletePlat(platId).subscribe(
+      (response) => {
+        console.log('Plat supprimé avec succès !', response);
+        this.loadPlatsForSelectedMenu();
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression du plat :', error);
+      }
+    );
   }
+  
   detailsplat(platId: number): void {
     this.platservice.getSinglePlat(platId).subscribe(
       (platDetails) => {
@@ -185,7 +200,7 @@ export class PlatsComponent {
 
   editmenuModal(platId: number) {
     this.platservice.getSinglePlat(platId).subscribe((response: any) => {
-      // console.log("c'est la reponse du truc", response)
+      console.log("c'est la reponse du truc", response)
       this.editingPlat = response.data;
       this.libelle = this.editingPlat.libelle;
       this.prix = this.editingPlat.prix;
@@ -194,72 +209,20 @@ export class PlatsComponent {
     });
   }
   modifierPlat(platId: string) {
-    this.platservice.updatePlat(platId).subscribe(() => {
+    const updatedPlatData = {
+      libelle: this.libelle,
+      descriptif: this.descriptif,
+      image: this.image,
+      menu_id: this.menuPlat,
+      prix: this.prix,
+    };
+  
+    this.platservice.updatePlat(platId, updatedPlatData).subscribe(() => {
       console.log('Plat mis à jour avec succès.', platId);
       this.loadPlats();
     });
   }
-
-
-  // saveChanges() {
-  //   console.log("Type modifié :", this.editedType);
-  //   const updatedCategory = {
-  //     type: this.editedType,
-  //     image: this.editImage || this.editingCategory.image,
-  //   };
-  //   if (this.editingCategory) {
-  //     if (this.editImage) {
-  //       // Si l'image est modifiée, téléchargez la nouvelle image dans Firebase Storage
-  //       const filePath = 'categorie/' + this.editImage.name;
-  //       const fileRef = this.storage.ref(filePath);
-  //       const task = this.storage.upload(filePath, this.editImage);
   
-  //       task.snapshotChanges().subscribe((snapshot: any) => {
-  //         if (snapshot.state === 'success') {
-  //           fileRef.getDownloadURL().subscribe((downloadURL) => {
-  //             updatedCategory.image = downloadURL;
-  //             this.updateCategory(this.editingCategory, updatedCategory);
-  //           });
-  //         }
-  //       });
-  //     } else {
-  //       // Si l'image n'est pas modifiée, mettez à jour la catégorie sans télécharger une nouvelle image
-  //       this.updateCategory(this.editingCategory, updatedCategory);
-  //     }
-  //   } else {
-  //     console.error("L'ID de la catégorie est indéfini lors de l'appel à updateCategory.");
-  //   }
-  // }
-  
-
-  // editcategorieModal(category: any) {
-
-  //   this.editingCategory = category;
-  //   this.editedType = category.type;
-
-  //   // Vérifiez la console pour vous assurer que editingCategory a un identifiant valide
-  //   console.log("Editing Category:", this.editingCategory);
-  //   this.categorieService.getSingleCategory(category).subscribe((response: any) => {
-  //     this.editedType = response.data.type;
-  //     this.editImage = response.data.image;
-  //   });
-  // }
-
-
-  // updateCategory(id: number, updatedCategory: any) {
-  //   console.log("c'est l'id et le update", id , updatedCategory);
-  //   this.categorieService.editcategorie(id, updatedCategory).subscribe(
-  //     (response) => {
-  //       console.log('Response after updating category:', response);
-  //       // updatedCategory=response
-  //       this.getAllCategories();
-  //     },
-  //     (error) => {
-  //       console.log('Error updating category:', error);
-  //     }
-  //   );
-  // }
-
 
   loadPlatsTotal() {
     this.platservice.getPlatsForTotal().subscribe((platsTtal: any) => {

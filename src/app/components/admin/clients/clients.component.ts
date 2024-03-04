@@ -10,6 +10,12 @@ import { ClientService } from 'src/app/Services/client/client.service';
 export class ClientsComponent {
   dtOptions: DataTables.Settings = {};
   clients :any []=[];
+  client : any[]=[] ;
+  name:string="";
+  email :string="";
+  phone :any ="";
+  adresse :string="";
+  updated_at :string="";
 
 constructor( private clientService : ClientService){}
 
@@ -44,5 +50,41 @@ constructor( private clientService : ClientService){}
       console.log(error);
     }
     );
+}
+// getDetailsRestaurant(restaurateur: any): void {
+//   // console.log('Restaurateur:', restaurateur);
+//   this.ajoutRestaurateurService.getRestaurantDetails(restaurateur.id).subscribe(
+//      (details) => {
+//       // console.log("la reponse du detail",details)
+//         this.name = details.data.name;
+//         this.adresse = details.data.adresse;
+//         this.phone = details.data.phone;
+//      },
+//      (error) => {
+//         console.error('Erreur lors de la récupération des détails du restaurant', error);
+//      }
+//   );
+// }
+openAcheteurDetails(client:number) :void{
+  this.clientService.detailclient(client).subscribe((response:any)=>{
+    console.log("Regarder", response)
+  this.name= response.data.name;
+  this.email = response.data.email;
+  this.phone = response.data.phone;
+  this.adresse = response.data.adresse;
+  this.updated_at = response.data.updated_at;
+  });
+
+}
+bloquer(client:number) :void{
+this.clientService.blocked(client).subscribe((response :any)=>{
+  console.log("c'est la reponse du back ", response);
+});
+}
+
+debloquer(client:number):void{
+  this.clientService.disblocked(client).subscribe((response :any)=>{
+    console.log("c'est la reponse du back ", response);
+  });
 }
 }

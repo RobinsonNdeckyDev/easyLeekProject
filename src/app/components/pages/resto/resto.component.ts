@@ -20,6 +20,8 @@ export class RestoComponent {
     this.loadMenus(this.restaurantId);
     this.loadPlats(this.restaurantId);
     // this.getListeRestaurateurs() ;
+    this.paginate(); 
+
   
   }
 
@@ -41,6 +43,7 @@ searchRestaurant = '';
 itemSearchs: any;
 
 
+
 // Propriétés de pagination
 itemsPerPage: number = 6;
 currentPage: number = 1;
@@ -52,29 +55,56 @@ currentPage: number = 1;
   //   return this.itemSearchs ? this.itemSearchs.slice(startIndex, endIndex) : this.restaurants.slice(startIndex, endIndex);
   // }
 
+  
+  getAllRestaurants() {
+    this.restaurantService.getListeRestaurateursPourtous().subscribe((response: any) => {
+      console.log("listes Restaurants", response)
+      this.restaurants = response.data;
+      this.itemSearchs = this.restaurants; 
+    });
+  }
+  paginate() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.itemSearchs = this.restaurants.slice(startIndex, endIndex);
+  }
+  changePage(page: number) {
+    if (page === -1) {
+      this.currentPage--;
+    } else {
+      this.currentPage = page;
+    }
+    this.paginate();
+  }
+  
+  getTotalPages(): number {
+    return Math.ceil(this.itemSearchs.length / this.itemsPerPage);
+  }
+  
+  getPageNumbers(): number[] {
+    return Array.from({ length: this.getTotalPages() }, (_, i) => i + 1);
+  }
+  
+  // ici je recupere l'ensemble de ce qui conserne le filtre 
   getAllCategories() {
     this.categorieService.getAllCategories().subscribe((response: any) => {
       // console.log("voir liste", response.data)
       this.categories = response.data;
     });
   }
-
-  getAllRestaurants() {
-    this.restaurantService.getListeRestaurateursPourtous().subscribe((response: any) => {
-      console.log("listes Restaurants", response)
-      this.restaurants = response.data;
-    });
-  }
-
+  // ici je fais le filtre des AccueilRestaurantComponent par raport a categorie selectionner 
   onRestoChange() {
     this.loadRestaurantsForSelectedCategory();
+    this.paginate();
   }
-
+  
   loadRestaurantsForSelectedCategory() {
     if (this.categorie_id) {
       this.categorieService.getSingleCategoryPourTous(this.categorie_id).subscribe(
         (restaurants: any) => {
           this.restaurants = restaurants.data;
+          this.paginate(); 
+          
           // console.log('Restaurants récupérés avec succès pour la catégorie sélectionnée!', this.restaurants);
         },
         (error) => {
@@ -85,10 +115,6 @@ currentPage: number = 1;
       // If no category selected, show all restaurants
       this.getAllRestaurants();
     }
-  }
-
-  toggleForm() {
-    this.DetailPlatidentifier = !this.DetailPlatidentifier;
   }
 
   loadMenus(restaurant_id: any) {
@@ -106,6 +132,10 @@ currentPage: number = 1;
   onMenuChange() {
     this.loadPlatsForSelectedMenu();
   }
+  toggleForm() {
+    this.DetailPlatidentifier = !this.DetailPlatidentifier;
+  }
+
 
   loadPlatsForSelectedMenu() {
     if (this.selectedMenuId) {

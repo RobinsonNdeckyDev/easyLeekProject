@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { ClientsComponent } from './clients/clients.component';
 import { DataTablesModule } from 'angular-datatables';
+import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DataTablesModule } from 'angular-datatables';
     ContactComponent,
     RestaurantsComponent,
     ClientsComponent,
+    ProfilAdminComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, FormsModule, DataTablesModule],
 })

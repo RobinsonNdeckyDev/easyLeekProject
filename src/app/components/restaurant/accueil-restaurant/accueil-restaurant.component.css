@@ -1,57 +1,103 @@
-body {
-    background-color: #f8f9fa;
+.row1 .card{
+    position: relative;
+    border-radius: 20px;
+}
+
+.tableCard .text{
+    color: #0F42A8;
+}
+
+.imgProp{
+    width: 50px;
+    height: 50px;
+    border: 1px dotted #0F42A8;
+}
+
+.titleHead th {
+    color: #0F42A8;
+    text-align: center;
+}
+
+.cardLogo{
+    border: 1px solid #0F42A8;
+    background-color: white;
+    padding: 15px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.folder-card {
-    position: relative;
-    background-color: #ffffff;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 300px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.folder-header {
-    height: 50px;
-    width: 100%;
-    /* background-color: #007bff; */
-    overflow: hidden;
-}
-
-.folder-headerun {
-    height: 50px;
-    width: 25%;
-    background-color: #007bff;
-}
-
-.folder-headerdeux {
-    height: 50px;
-    width: 75%;
-    background-color: black;
-}
-
-.folder-content {
-    padding: 20px;
-}
-
-.folder-content h2 {
-    color: #007bff;
-}
-
-.folder-content p {
-    color: #495057;
-}
-
-.folder-corner {
     position: absolute;
-    top: 0;
-    right: 0;
-    border-top: 20px solid transparent;
-    border-left: 20px solid #ced4da;
+    left: 40%;
+    top: 40px;
+}
+
+.cardLogo img{
+    width: 40px;
+    height: 40px;
+}
+
+.cardImg img{
+    width: 100%;
+    height: 80px;
+}
+
+.cardBody{
+    margin-top: 30px;
+    padding: 3% 4%;
+}
+
+.cardBody span{
+    color: #0F42A8;
+    font-weight: 700;
+}
+
+.row2 table img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+}
+
+.row2 .table .thead tr td{
+    text-align: center;
+}
+
+.row2 .table .tbody tr{
+    align-items: center;
+}
+
+.row2 .cardStatistique{
+    border-radius: 20px;
+}
+
+.row2 .cardStatistique .cardImgStat img{
+    height: 80px;
+    width: 100%;
+}
+
+.row2 table .titreTab th{
+    color: #0F42A8 !important;
+}
+
+.row2 table .detailIcon i{
+    color: #0F42A8;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.row2 .tableCard button{
+    background-color: black;
+    font-weight: bold;
+}
+
+
+.horizontal-border {
+    border-collapse: collapse;
+}
+
+.horizontal-border th,
+.horizontal-border td {
+    border-bottom: 1px solid #dddddd;
+    /* Couleur de la bordure */
 }

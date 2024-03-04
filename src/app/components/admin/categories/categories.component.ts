@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 export class CategoriesComponent {
   categories: any[] = [];
   nomCategorie: string = '';
-  editingCategory: any = {};
+  editingCategory: any;
   editedType: string = '';
   editImage!: File;
   image!: File;
@@ -44,15 +44,13 @@ export class CategoriesComponent {
         },
       },
     };
-
     this.getAllCategories();
-
   }
-
+  
   // Récupération de toutes les categories
   getAllCategories() {
     this.categorieService.getAllCategories().subscribe((response: any) => {
-      console.log("La liste des categories", response.data)
+      console.log("La liste des categories", response)
       this.categories = response.data;
     });
   }
@@ -71,35 +69,38 @@ export class CategoriesComponent {
 //     );
 // }
 
-  saveChanges() {
-    console.log("Type modifié :", this.editedType);
-    const updatedCategory = {
-      type: this.editedType,
-      image: this.editImage || this.editingCategory.image,
-    };
-    if (this.editingCategory) {
-      if (this.editImage) {
-        // Si l'image est modifiée, téléchargez la nouvelle image dans Firebase Storage
-        const filePath = 'categorie/' + this.editImage.name;
-        const fileRef = this.storage.ref(filePath);
-        const task = this.storage.upload(filePath, this.editImage);
-  
-        task.snapshotChanges().subscribe((snapshot: any) => {
-          if (snapshot.state === 'success') {
-            fileRef.getDownloadURL().subscribe((downloadURL) => {
-              updatedCategory.image = downloadURL;
-              this.updateCategory(this.editingCategory, updatedCategory);
-            });
-          }
-        });
-      } else {
-        // Si l'image n'est pas modifiée, mettez à jour la catégorie sans télécharger une nouvelle image
-        this.updateCategory(this.editingCategory, updatedCategory);
-      }
+
+// modifier 
+saveChanges() {
+  const updatedCategory = {
+    type: this.editedType,
+    image: this.editImage,
+  };
+
+  if (this.editingCategory) {
+    if (this.editImage) {
+      // Si l'image est modifiée, téléchargez la nouvelle image dans Firebase Storage
+      const filePath = 'categorie/' + this.editImage.name;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, this.editImage);
+      
+      task.snapshotChanges().subscribe((snapshot: any) => {
+        if (snapshot.state === 'success') {
+          fileRef.getDownloadURL().subscribe((downloadURL) => {
+            updatedCategory.image = downloadURL;
+            this.updateCategory(this.editingCategory, updatedCategory);
+          });
+        }
+      });
     } else {
-      console.error("L'ID de la catégorie est indéfini lors de l'appel à updateCategory.");
+      // Si l'image n'est pas modifiée, mettez à jour la catégorie sans télécharger une nouvelle image
+      this.updateCategory(this.editingCategory, updatedCategory);
     }
+  } else {
+    console.error("L'ID de la catégorie est indéfini lors de l'appel à updateCategory.");
   }
+}
+
   
 
   editcategorieModal(category: any) {
@@ -110,18 +111,20 @@ export class CategoriesComponent {
     // Vérifiez la console pour vous assurer que editingCategory a un identifiant valide
     console.log("Editing Category:", this.editingCategory);
     this.categorieService.getSingleCategory(category).subscribe((response: any) => {
+      console.log("de la reponse du back sur getsingle", response);
       this.editedType = response.data.type;
       this.editImage = response.data.image;
+      console.log("voir si type retourne quelque chose ", response.data.type);
+      console.log("voir si image retourne quelque chose ", response.data.image);
     });
   }
 
 
   updateCategory(id: number, updatedCategory: any) {
-    console.log("c'est l'id et le update", id , updatedCategory);
+    // console.log("c'est l'id et le update", id , updatedCategory);
     this.categorieService.editcategorie(id, updatedCategory).subscribe(
       (response) => {
         console.log('Response after updating category:', response);
-        // updatedCategory=response
         this.getAllCategories();
       },
       (error) => {
@@ -138,10 +141,13 @@ export class CategoriesComponent {
     console.log(this.fichierAdd);
   }
 
+  // ajouter
+
   save() {
     if (this.fichierAdd) {
       const filePath = 'categorie/' + this.fichierAdd.name;
       const fileRef = this.storage.ref(filePath);
+      console.log("this storage ", fileRef , filePath);
       const task = this.storage.upload(filePath, this.fichierAdd);
 
       task.snapshotChanges().subscribe((snapshot: any) => {

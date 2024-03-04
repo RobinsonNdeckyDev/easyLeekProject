@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AjoutRestaurateurService } from 'src/app/Services/ajout-restaurateur.service';
 import { CategorieService } from 'src/app/Services/categorie.service';
-import { ThemeService } from 'src/app/Services/theme/theme.service';
+
 
 @Component({
   selector: 'app-accueil',
@@ -15,12 +15,10 @@ export class AccueilComponent {
   categories: any[] = [];
   restaurants: any[] = [];
   categorie_id : string ="";
-constructor(private themeService:ThemeService,private categorieService: CategorieService ,private restaurantService:AjoutRestaurateurService , private router: Router) {}
+constructor(private categorieService: CategorieService ,private restaurantService:AjoutRestaurateurService , private router: Router) {}
 
 
-toggleTheme() {
-  this.themeService.toggleMode();
-}
+
 ngOnInit() {
   this.getAllCategories();
   this.getListeRestaurateurs()
@@ -66,5 +64,6 @@ loadRestaurantsForSelectedCategory() {
 consulterDetails(restaurantId: string) {
   this.router.navigate(['/restaurant', restaurantId]);
 }
+
 }
 
