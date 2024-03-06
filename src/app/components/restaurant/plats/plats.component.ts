@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { CommandeService } from 'src/app/Services/commande.service';
 import { GestionPlatService } from 'src/app/Services/gestion-plat.service';
 import { PlatService } from 'src/app/Services/menu.service';
-
 import {
   AngularFireStorage,
   AngularFireStorageModule,
 } from '@angular/fire/compat/storage';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-plats',
@@ -49,17 +49,17 @@ export class PlatsComponent {
   }
 
   test(id: number) {
-    console.log(id);
+    // console.log(id);
   }
 
   // tous les plats
   getAllmenu() {
     this.recupererMenu.getMenus().subscribe(
       (menu: any) => {
-        console.log('Liste des menus', menu);
+        // console.log('Liste des menus', menu);
         this.menus = menu.plats;
-        console.log('Liste menus: ', this.menus);
-        console.log('Id du menu 1: ', this.menus[0].id);
+        // console.log('Liste menus: ', this.menus);
+        // console.log('Id du menu 1: ', this.menus[0].id);
       },
       (error) => {
         console.error('Erreur lors de la récupération des menus :', error);
@@ -104,9 +104,9 @@ export class PlatsComponent {
 
     this.platservice.ajouterPlat(newPlat).subscribe(
       (response) => {
-        console.log('response après ajout du plat: ', response);
+        // console.log('response après ajout du plat: ', response);
         this.plats = response
-        this.loadPlats()
+        this.loadPlats();
 
       },
       (error) => {
@@ -122,7 +122,7 @@ export class PlatsComponent {
   loadPlats() {
     this.platservice.getPlatsForMenu('').subscribe((plats: any) => {
       this.plats = plats;
-      console.log('Plats récupérés avec succès!', this.plats);
+      // console.log('Plats récupérés avec succès!', this.plats);
     });
   }
 
@@ -131,10 +131,10 @@ export class PlatsComponent {
       this.platservice.getPlatsForMenu(this.menu_id).subscribe(
         (plats: any) => {
           this.plats = plats.data;
-          console.log(
-            'Plats récupérés avec succès pour le menu sélectionné!',
-            this.plats
-          );
+          // console.log(
+          //   'Plats récupérés avec succès pour le menu sélectionné!',
+          //   this.plats
+          // );
         },
         (error) => {
           console.error(
@@ -148,7 +148,7 @@ export class PlatsComponent {
   archiver(platId: number): void {
     this.platservice.archiver(platId).subscribe(
         (response) => {
-            console.log('reponse du .', response);
+            // console.log('reponse du .', response);
             this.loadPlatsForSelectedMenu();
         },
     );
@@ -156,7 +156,7 @@ export class PlatsComponent {
 showArchivedPlats(): void {
   this.platservice.getArchivedPlats().subscribe(
       (archivedPlats) => {
-          console.log('Archived plats retrieved successfully.', archivedPlats);
+          // console.log('Archived plats retrieved successfully.', archivedPlats);
           this.plats = archivedPlats; // Assuming plats is your array holding dishes
       },
       (error) => {
@@ -164,17 +164,34 @@ showArchivedPlats(): void {
       }
   );
 }
-  supprimerPlat(platId: string): void {
-    this.platservice.deletePlat(platId).subscribe(
-      (response) => {
-        console.log('Plat supprimé avec succès !', response);
-        this.loadPlatsForSelectedMenu();
-      },
-      (error) => {
-        console.error('Erreur lors de la suppression du plat :', error);
-      }
-    );
-  }
+supprimerPlat(platId: string): void {
+  // Utilisez SweetAlert pour afficher une boîte de dialogue de confirmation
+  Swal.fire({
+    title: 'Êtes-vous sûr(e) de vouloir supprimer ce plat ?',
+    text: 'Cette action est irréversible !',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Oui, supprimer',
+    cancelButtonText: 'Annuler',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // L'utilisateur a confirmé la suppression, continuez avec la suppression du plat
+      this.platservice.deletePlat(platId).subscribe(
+        (response) => {
+          // console.log('Plat supprimé avec succès !', response);
+          this.loadPlatsForSelectedMenu();
+          this.loadPlats();
+          Swal.fire('Plat supprimé !', 'Le plat a été supprimé avec succès.', 'success');
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression du plat :', error);
+          Swal.fire('Erreur', 'Une erreur est survenue lors de la suppression du plat.', 'error');
+        }
+      );
+    }
+  });
+}
+
   
   detailsplat(platId: number): void {
     this.platservice.getSinglePlat(platId).subscribe(
@@ -186,15 +203,17 @@ showArchivedPlats(): void {
       }
     );
   }
-
+  created_at:any="";
   showDetailsModal(platId: number): void {
     // console.log("ca",platId)
     this.platservice.getSinglePlat(platId).subscribe((response: any) => {
-      // console.log("c'est la reponse du truc", response)
+      console.log("c'est la reponse du truc", response)
       this.details = response.data;
       this.libelle = this.details.libelle;
       this.prix = this.details.prix;
       this.descriptif = this.details.descriptif;
+      this.image =this.details.image;
+      this.created_at=this.details.created_at
     });
   }
 
@@ -218,7 +237,7 @@ showArchivedPlats(): void {
     };
   
     this.platservice.updatePlat(platId, updatedPlatData).subscribe(() => {
-      console.log('Plat mis à jour avec succès.', platId);
+      // console.log('Plat mis à jour avec succès.', platId);
       this.loadPlats();
     });
   }
@@ -226,8 +245,55 @@ showArchivedPlats(): void {
 
   loadPlatsTotal() {
     this.platservice.getPlatsForTotal().subscribe((platsTtal: any) => {
-      console.log('Plats récupérés avec succès!', platsTtal);
+      // console.log('Plats récupérés avec succès!', platsTtal);
       this.plats = platsTtal.plats;
+
     });
   }
+
+   // Attributs pour faire les recherche
+ searchPlats: string = '';
+ filteredPlats: any[] = []; // Ajout de cette ligne
+ itemSearchs: any;
+
+
+ // Propriétés de pagination pour les plats
+ itemsPerPagePlats: number = 6;
+ currentPagePlats: number = 1;
+
+ // Méthode pour gérer la pagination des plats
+ get paginatedPlats(): any[] {
+   const startIndex = (this.currentPagePlats - 1) * this.itemsPerPagePlats;
+   const endIndex = startIndex + this.itemsPerPagePlats;
+   return this.filteredPlats.length > 0 ? this.filteredPlats.slice(startIndex, endIndex) : this.plats.slice(startIndex, endIndex);
+ }
+
+ // Méthode pour changer de page des plats
+ changePagePlats(page: number) {
+   if (page > 0 && page <= this.getTotalPagesPlats()) {
+     this.currentPagePlats = page;
+   }
+ }
+
+ // Méthode pour obtenir les numéros de page des plats
+ getPageNumbersPlats(): number[] {
+   const totalPages = this.getTotalPagesPlats();
+   return Array.from({ length: totalPages }, (_, index) => index + 1);
+ }
+
+ // Méthode pour obtenir le nombre total de pages des plats
+ getTotalPagesPlats(): number {
+   const totalItems = this.filteredPlats.length > 0 ? this.filteredPlats.length : this.plats.length;
+   return Math.ceil(totalItems / this.itemsPerPagePlats);
+ }
+
+ // Méthode pour filtrer les plats
+filterPlats() {
+  this.currentPagePlats = 1; // Réinitialise la page actuelle lors de la recherche
+  this.filteredPlats = this.plats.filter(plat =>
+    plat.libelle.toLowerCase().includes(this.searchPlats.toLowerCase())
+  );
+  // console.log('Filtered plats:', this.filteredPlats);
+}
+
 }

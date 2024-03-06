@@ -43,11 +43,11 @@ constructor( private clientService : ClientService){}
 
   getAllclient() {
     this.clientService.getListeClients().subscribe((response: any) => {
-      console.log("Regarder", response)
+      // console.log("Regarder", response)
       this.clients = response.data;
     },
     (error) => {
-      console.log(error);
+      // console.log(error);
     }
     );
 }
@@ -67,7 +67,7 @@ constructor( private clientService : ClientService){}
 // }
 openAcheteurDetails(client:number) :void{
   this.clientService.detailclient(client).subscribe((response:any)=>{
-    console.log("Regarder", response)
+    // console.log("Regarder", response)
   this.name= response.data.name;
   this.email = response.data.email;
   this.phone = response.data.phone;
@@ -78,13 +78,13 @@ openAcheteurDetails(client:number) :void{
 }
 bloquer(client:number) :void{
 this.clientService.blocked(client).subscribe((response :any)=>{
-  console.log("c'est la reponse du back ", response);
+  // console.log("c'est la reponse du back ", response);
 });
 }
 
 debloquer(client:number):void{
   this.clientService.disblocked(client).subscribe((response :any)=>{
-    console.log("c'est la reponse du back ", response);
+    // console.log("c'est la reponse du back ", response);
   });
 }
 }

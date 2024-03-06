@@ -10,13 +10,13 @@
 .sidebar {
     height: 100vh;
     /* background-color: #0F42A8; */
-    /* overflow-y: scroll; */
+    /* overflow-y: scroll */
 }
 
 .contenu {
     height: 100vh;
     overflow: hidden;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
 }
 
 .navbar {

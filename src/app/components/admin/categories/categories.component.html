@@ -1,111 +1,145 @@
-  <div class="py-4 px-4">
-    <h5 class="navTitle"><a href="" routerLink="categories" class="my-3">Liste des categories</a></h5>
+<div class="py-4 px-4">
+  <h5 class="navTitle text-center fw-bold "><a href="" routerLink="categories" class="my-3">Liste des categories</a></h5>
 
-    <div class="row .row2 mt-4 shadow rounded-4">
-        <div class="col-12 ">
-            <div class="tableCard py-4 border-0 ">
+  <div class="row .row2 mt-4 shadow rounded-4">
+    <div class="col-12 ">
+      <div class="tableCard py-4 border-0 ">
 
-              <button class="btn mb-4 active boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajouterCategorie">
-                ajouter une catégorie
-              </button>
+        <button class="btn mb-4 active boutonajouter-blog" data-bs-toggle="modal" data-bs-target="#ajouterCategorie">
+          ajouter une catégorie
+        </button>
 
-                <!-- <div *ngIf="acheteurs.length === 0">
+        <!-- <div *ngIf="acheteurs.length === 0">
                     <p class="fw-lighter px-2"> <span class="text-danger">Oops!</span> Pas d'acheteurs disponibles pour
                         l'instant...</p>
                 </div> -->
 
-                <div class="table-responsive">
-                    <table datatable [dtOptions]="dtOptions" class="table row-border hover  w-100" >
-                        <thead class="">
-                            <tr class="titleHead">
-                              <th scope="col">Image</th>
-                              <th scope="col">Nom</th>
-                              <th scope="col">Date</th>
-                              <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                              <tr class="" *ngFor="let categorie of categories">
-                                <td scope="col"><img src="{{ categorie.image }}" alt="" style="width: 50px; height: 50px;"></td>
-                                <td scope="col">{{ categorie.type }}</td>
-                                <td scope="col">{{ categorie.created_at | date:'dd/MM/yyyy'}}</td>
-                                <td scope="col">
-                                  <span class="mx-2"><i class="bi bi-pencil-square iconDetail" data-bs-toggle="modal"
-                                      data-bs-target="#editcategorieModal" (click)="editcategorieModal(categorie.id)">
-                                    </i>
-                                  </span>
-                                </td>
-                              </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="table-responsive">
+          <table datatable [dtOptions]="dtOptions" class="table row-border hover  w-100">
+            <thead class="">
+              <tr class="titleHead">
+                <th scope="col">Image</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Date</th>
+                <!-- <th scope="col">Action</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="" *ngFor="let categorie of categories">
+                <td scope="col"><img src="{{ categorie.image }}" alt="" style="width: 50px; height: 50px;"></td>
+                <td scope="col">{{ categorie.type }}</td>
+                <td scope="col">{{ categorie.created_at | date:'dd/MM/yyyy'}}</td>
+                <!-- <td scope="col"> -->
+                  <!-- <span class="mx-2"><i class="bi bi-pencil-square iconDetail" data-bs-toggle="modal"
+                      data-bs-target="#editcategorieModal" (click)="editcategorieModal(categorie.id)">
+                    </i>
+                  </span> -->
+                  <!-- <span class="mx-2"><i class="bi bi-eye iconDetail" data-bs-toggle="modal"
+                    data-bs-target="#voirDetails" (click)="voirDetails(categorie.id)">
+                  </i>
+                </span> -->
+                <!-- </td> -->
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
-  <!-- les modalles -->
-  <!-- debut model d'ajoute d'un categorie dans le blog -->
-  <div class="modal fade" id="ajouterCategorie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title w-100 fs-4 titreAjout text-center">Ajouter un categorie</h1>
-          <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i
-              class="bi bi-x-lg"></i></button>
-        </div>
-        <div class="modal-body">
-          <form class="titreCategorie" (ngSubmit)="save()">
-            <div class="mb-3">
-              <label for="type">Titre du catégorie:</label>
-              <input class="form-control" type="text" id="type" name="type" required [(ngModel)]="type">
-            </div>
+<!-- les modalles -->
+<!-- debut model d'ajoute d'un categorie dans le blog -->
+<div class="modal fade" id="ajouterCategorie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title w-100 fs-4 titreAjout text-center">Ajouter un categorie</h1>
+        <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i
+            class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <form class="titreCategorie" (ngSubmit)="save()">
+          <div class="mb-3">
+            <label for="type">Titre du catégorie:</label>
+            <input class="form-control" type="text" id="type" name="type" required [(ngModel)]="type" (input)="validatetype()">
+            <!-- <span *ngIf="typeTouched && typeEmpty && !validationMessages['type']" class="text-danger">
+              Le nom est requis
+            </span> -->
+            <span *ngIf="validationMessages['type']" class="text-danger">{{ validationMessages['type'] }}</span>
+            <span *ngIf="!validationMessages['type'] && type" class="text-success">Correct</span>
+          </div>
             <div class="mb-4">
-              <label for="inputImage" class="form-label">Image</label>
-              <input type="file" class="form-control" id="inputGroupFile02" name="image" [(ngModel)]="image"
-                (change)="upload($event)" accept="image/*">
-            </div>
+            <label for="inputImage" class="form-label">Image</label>
+            <input type="file" class="form-control" id="inputGroupFile02" name="image" [(ngModel)]="image"
+              (change)="upload($event)" accept="image/*">
+          </div>
 
-            <button class="btn btn-add" type="submit" data-bs-toggle="modal">Ajouter</button>
-          </form>
-        </div>
+          <button class="btn btn-add" type="submit" data-bs-toggle="modal">Ajouter</button>
+        </form>
       </div>
     </div>
   </div>
-  <!-- fin du model d'ajoute d'un categorie dans le blog -->
+</div>
+<!-- fin du model d'ajoute d'un categorie dans le blog -->
 
 
 
-  <!-- debut du model de modification  -->
-  <div class="modal fade" id="editcategorieModal" tabindex="-1" aria-labelledby="modifierLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title titreMdfcategorie w-100 text-center fs-3" id="modifierLabel">Modifier categorie</h1>
-          <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" aria-label="Close"><i
-              class="bi bi-x-lg"></i></button>
-        </div>
-        <div class="modal-body">
-          <form class="mdfcategorie" (ngSubmit)="saveChanges()">
-            <div class="mb-3">
-              <label for="editTitle">Nouveau titre:</label>
-              <input id="editedType" class="form-control" name="editedType" required [(ngModel)]="editedType">
-            </div>
-            <div class="mb-4">
-              <label for="editImageInput" class="form-label">Image</label>
-              <input type="file" class="form-control" id="editImageInput" name="editImage"
-                [(ngModel)]="editImage" (change)="upload($event)" accept="image/*">
-            </div>
+<!-- debut du model de modification  -->
+<div *ngIf="editingCategory" class="modal fade" id="editcategorieModal" tabindex="-1" aria-labelledby="modifierLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title titreMdfcategorie w-100 text-center fs-3" id="modifierLabel">Modifier categorie</h1>
+        <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" aria-label="Close"><i
+            class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <form class="mdfcategorie" (ngSubmit)="saveChanges()">
+          <div class="mb-3">
+            <label for="editTitle">Nouveau titre:</label>
+            <input id="editedType" class="form-control" name="editedType" required [(ngModel)]="editedType">
+          </div>
+          <div class="mb-4">
+            <label for="editImageInput" class="form-label">Image</label>
+            <input type="file" class="form-control" id="editImageInput" name="editImage" [(ngModel)]="editImage"
+              (change)="upload($event)" accept="image/*">
 
-            <div class="mdfBtns d-flex justify-content-between">
-              <button type="submit" class="btn btnUpdate" data-bs-dismiss="modal" (click)="saveChanges()">Enregistrer</button>
-              <button type="button" class="btn btnAnnuler" data-bs-dismiss="modal">Annuler</button>
-            </div>
-          </form>
-        </div>
+          </div>
+
+          <div class="mdfBtns d-flex justify-content-between">
+            <button type="submit" class="btn btnUpdate" data-bs-dismiss="modal"
+              (click)="saveChanges()">Enregistrer</button>
+            <button type="button" class="btn btnAnnuler" data-bs-dismiss="modal">Annuler</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  <!-- fin du model de modification  -->
-  <!-- les modalles -->
+</div>
+<!-- fin du model de modification  -->
+<!-- modal details -->
+<!-- Modal -->
+<!-- Modal details -->
+<!-- Modal details -->
+<div class="modal fade" id="voirDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="voirDetailsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="voirDetailsLabel">Nom catégorie: {{editedType}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><img src="{{ editImage }}" alt="Image de la catégorie" style="width: 50px; height: 50px;"></p>
+        <!-- <p>Nombre de restaurants dans cette catégorie : {{NombreRestaurantsParCategorie}} </p> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+
+<!-- les modalles -->

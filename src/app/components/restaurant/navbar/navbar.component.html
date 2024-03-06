@@ -12,14 +12,12 @@
 
         <div class="dropdown-center m-0 p-0">
             <button type="button" class="btn m-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="http://127.0.0.1:8000/images/{{user.image}}" class="" alt="">
+                <img src="{{image}}" class="" alt="">
                 <span></span>
-                <!-- {{userConnected?.prenom}} -->
             </button>
             <ul class="dropdown-menu mt-3 border">
-                <li><a class="dropdown-item" routerLink="profilResto">Mon profil</a></li>
+                <!-- <li><a class="dropdown-item" routerLink="profilResto">Mon profil</a></li> -->
                 <li class=""><a class="dropdown-item" routerLink="profil_Admin" (click)="logout()">Deconnexion</a></li>
-                <!-- <app-logout-admin></app-logout-admin> -->
             </ul>
         </div>
 

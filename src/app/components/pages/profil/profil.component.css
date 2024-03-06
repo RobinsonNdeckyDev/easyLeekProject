@@ -130,9 +130,9 @@ body {
     transition: color 0.3s ease;
 }
 
-.profile-page-title a:hover {
+/* .profile-page-title a:hover {
     color: #FFA07A; 
-}
+} */
 
 .profile-content-main {
     margin-top: 20px;
@@ -214,7 +214,10 @@ body {
     border-radius: 10px;
     margin-left: 90%;
   }
-  
+  .active-tab {
+    background-color: var(--rose) ;
+    color: white !important; 
+  }
 
 
 

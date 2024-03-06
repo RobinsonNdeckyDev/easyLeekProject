@@ -104,6 +104,8 @@ validatePhoneNumber(phone: string): boolean {
             this.name = details.data.name;
             this.adresse = details.data.adresse;
             this.phone = details.data.phone;
+            this.description=details.data.description
+            this.image=details.data.image
          },
          (error) => {
             console.error('Erreur lors de la récupération des détails du restaurant', error);

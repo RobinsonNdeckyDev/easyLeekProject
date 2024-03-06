@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { PanierService } from 'src/app/Services/panier.service';
 import { UserService } from 'src/app/Services/user.service';
 
+
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -18,6 +19,8 @@ export class ProfilComponent {
   modifiedPhone: any;
   user :any []=[];
   password: any;
+  filteredCommandes: any[] = [];
+
 
 
   constructor(private authService: AuthService
@@ -28,17 +31,31 @@ export class ProfilComponent {
   }
 
   voirDetails(commandId :string){}
-  showTemplate1() {
-    this.currentTemplate = 'template1';
-  }
+// profil.component.ts
+activeTabIndex: number = 0; // Initialisez à l'index du template actif par défaut
 
-  showTemplate2() {
-    this.currentTemplate = 'template2';
-  }
-  showTemplate3() {
-    this.currentTemplate = 'template3';
+showTemplate1() {
+  this.currentTemplate = 'template1';
+  this.etatSelectionne = 'acceptee';
+  this.filteredCommandes = this.filtrerCommandesParEtat(this.etatSelectionne);
+  this.activeTabIndex = 0; // Mettez à jour l'index du template actif
+}
 
-  }
+showTemplate2() {
+  this.currentTemplate = 'template2';
+  this.etatSelectionne = 'terminee';
+  this.filteredCommandes = this.filtrerCommandesParEtat(this.etatSelectionne);
+  this.activeTabIndex = 1; // Mettez à jour l'index du template actif
+}
+
+showTemplate3() {
+  this.currentTemplate = 'template3';
+  this.etatSelectionne = 'refusee';
+  this.filteredCommandes = this.filtrerCommandesParEtat(this.etatSelectionne);
+  this.activeTabIndex = 2; // Mettez à jour l'index du template actif
+}
+
+  
   
   name: string = '';
   phone: string = '';
@@ -88,17 +105,21 @@ export class ProfilComponent {
       (commandes: any) => {
         console.log('cest la reponse du utilisateur commande du commande ', commandes)
         this.Commandes = commandes.data;
+  
+        // Tri des commandes par date de création décroissante
+        this.Commandes.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
       },
       (error) => {
         console.error('Erreur lors de la récupération des commandes utilisateur:', error);
       }
     );
   }
+  
 
-  filterCommandesByEtat(etat: string): any[] {
-    return this.Commandes.filter((commande) => commande.etatCommande === etat);
-  }
-
+ // Dans votre composant TypeScript
+filtrerCommandesParEtat(etat: string): any[] {
+  return this.Commandes.filter(commande => commande.etatCommande === etat);
+}
   openEditModal(): void {
     // Charger les informations de l'utilisateur actuel dans les champs du formulaire
 

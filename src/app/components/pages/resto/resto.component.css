@@ -3,6 +3,11 @@
     justify-content: space-between;
 }
 
+.carousel-item img{
+    width: 100%;
+    height: 70vh;
+}
+
 .proxiHead .categorie,
 .search {
     display: flex;
@@ -35,4 +40,26 @@
     border-color: var(--rose);
     color: white;
   }
-  
+.cardRestoPlat{
+
+}
+.cardRestoEntete{
+
+  }
+.cardBodyResto .card-title{
+   font-size: larger;
+   font-weight: 700;
+   color: var(--maron);
+  }
+  .card-titlePrix{
+    color: var(--rose);
+    font-weight: 700;
+
+  }
+.cardFooterResto{
+background-color: var(--fisa);
+}
+.boutonCommandeDts{
+ background-color: var(--rose);
+ color: white;
+}

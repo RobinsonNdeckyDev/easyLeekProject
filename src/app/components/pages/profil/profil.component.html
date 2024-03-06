@@ -14,17 +14,17 @@
                         <div class="profile-img"></div>
                     </div>
                     <div class="my-profile-detail">
-                        <div class="my-profile-info">
-                            <h3>{{ name }}</h3>
+                        <div class="my-profile-info ">
+                            <h3 class="fw-bold ">{{ name }}</h3>
                             <p class="rtl-num-cod">
                                 <i class="iicon-icon-35"></i> {{ phone }}
                             </p>
                         </div>
-                        <div class="edit-pro-btn">
+                        <!-- <div class="edit-pro-btn">
                             <button class="btn btnMdf" data-bs-toggle="modal" data-bs-target="#mdfInfoAdmin" (click)="openEditModal()"> Editer le
                                 profil</button>
 
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="sidebar-menu-main">
                     <div class="sidebar-menu">
                         <div class="ordering-title">
-                            <h6>Commande</h6>
+                            <h6 class="fw-bold">Commande</h6>
                         </div>
                         <ul class="nav nav-tabs">
                             <li class="tabs active">
@@ -53,22 +53,15 @@
 
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active"
-                                            (click)="showTemplate1() ; etatSelectionne = 'acceptee'">Commandes en
-                                            cours</a>
+                                      <a class="nav-link" [ngClass]="{'active-tab': activeTabIndex === 0}" (click)="showTemplate1() ; etatSelectionne = 'acceptee'">Commandes en cours</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link"
-                                            (click)="showTemplate2(); etatSelectionne = 'terminee'">Commandes
-                                            passées</a>
+                                      <a class="nav-link" [ngClass]="{'active-tab': activeTabIndex === 1}" (click)="showTemplate2(); etatSelectionne = 'terminee'">Commandes passées</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link"
-                                            (click)="showTemplate3() ; etatSelectionne = 'refusee'">Commandes
-                                            refusées</a>
+                                      <a class="nav-link" [ngClass]="{'active-tab': activeTabIndex === 2}" (click)="showTemplate3() ; etatSelectionne = 'refusee'">Commandes refusées</a>
                                     </li>
-
-                                </ul>
+                                  </ul>
                             </div>
 
                             <ng-container
@@ -85,18 +78,18 @@
                                                             <th scope="col">Date</th>
                                                             <th scope="col">Prix</th>
                                                             <th scope="col">Etat</th>
-                                                            <th scope="col">Action</th>
+                                                            <!-- <th scope="col">Action</th> -->
                                                         </tr>
                                                     </thead>
-                                                    <tbody *ngIf="Commandes.length > 0; else noCommands">
-                                                        <tr class="" *ngFor="let commande of Commandes">
+                                                    <tbody *ngIf="filteredCommandes.length > 0; else noCommands">
+                                                        <tr class="" *ngFor="let commande of filteredCommandes">
                                                             <td scope="col">{{ commande.nomPlat }}</td>
                                                             <td scope="col">{{ commande.created_at | date:'dd/MM/yyyy'}}
                                                             </td>
                                                             <td scope="col">{{ commande.prixCommande }}</td>
                                                             <td scope="col">{{ commande.etatCommande }}</td>
 
-                                                            <td scope="col">
+                                                            <!-- <td scope="col">
                                                                 <span class="mx-2"><i
                                                                         class="bi bi-pencil-square iconDetail"
                                                                         data-bs-toggle="modal"
@@ -104,7 +97,7 @@
                                                                         (click)="voirDetails(commande.id)">
                                                                     </i>
                                                                 </span>
-                                                            </td>
+                                                            </td> -->
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -124,8 +117,54 @@
                             </ng-template>
 
                             <ng-template #template2>
+                                <div class="profile-content-main">
+                                    <div class="tab-content">
+                                        <div>
+                                            <div class="table-responsive">
+                                                <table datatable class="table row-border hover  w-100">
+                                                    <thead class="">
+                                                        <tr class="titleHead">
+                                                            <th scope="col">Nom du plat</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Prix</th>
+                                                            <th scope="col">Etat</th>
+                                                            <!-- <th scope="col">Action</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="filteredCommandes.length > 0; else noCommands">
+                                                        <tr class="" *ngFor="let commande of filteredCommandes">
+                                                            <td scope="col">{{ commande.nomPlat }}</td>
+                                                            <td scope="col">{{ commande.created_at | date:'dd/MM/yyyy'}}
+                                                            </td>
+                                                            <td scope="col">{{ commande.prixCommande }}</td>
+                                                            <td scope="col">{{ commande.etatCommande }}</td>
+
+                                                            <!-- <td scope="col">
+                                                                <span class="mx-2"><i
+                                                                        class="bi bi-pencil-square iconDetail"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#editmenuModal"
+                                                                        (click)="voirDetails(commande.id)">
+                                                                    </i>
+                                                                </span>
+                                                            </td> -->
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <ng-template #noCommands>
+                                                <div>
+                                                    <figure>
+                                                        <img src="/assets/imageplatvide.png" alt="je suis l'image " />
+                                                    </figure>
+                                                    <p class="no-found">Aucune commande passée trouvée.</p>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div *ngIf="Commandes.length > 0; else noCommands">
-                                    <p>Contenu du template 2</p>
                                 </div>
                                 <ng-template #noCommands>
                                     <div class="mx-auto">
@@ -137,8 +176,54 @@
                                 </ng-template>
                             </ng-template>
                             <ng-template #template3>
+                                <div class="profile-content-main">
+                                    <div class="tab-content">
+                                        <div>
+                                            <div class="table-responsive">
+                                                <table datatable class="table row-border hover  w-100">
+                                                    <thead class="">
+                                                        <tr class="titleHead">
+                                                            <th scope="col">Nom du plat</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Prix</th>
+                                                            <th scope="col">Etat</th>
+                                                            <!-- <th scope="col">Action</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="filteredCommandes.length > 0; else noCommands">
+                                                        <tr class="" *ngFor="let commande of filteredCommandes">
+                                                            <td scope="col">{{ commande.nomPlat }}</td>
+                                                            <td scope="col">{{ commande.created_at | date:'dd/MM/yyyy'}}
+                                                            </td>
+                                                            <td scope="col">{{ commande.prixCommande }}</td>
+                                                            <td scope="col">{{ commande.etatCommande }}</td>
+
+                                                            <!-- <td scope="col">
+                                                                <span class="mx-2"><i
+                                                                        class="bi bi-pencil-square iconDetail"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#editmenuModal"
+                                                                        (click)="voirDetails(commande.id)">
+                                                                    </i>
+                                                                </span>
+                                                            </td> -->
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <ng-template #noCommands>
+                                                <div>
+                                                    <figure>
+                                                        <img src="/assets/imageplatvide.png" alt="je suis l'image " />
+                                                    </figure>
+                                                    <p class="no-found">Aucune commande passée trouvée.</p>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div *ngIf="Commandes.length > 0; else noCommands">
-                                    <p>Contenu du template 3</p>
                                 </div>
                                 <ng-template #noCommands>
                                     <div class="mx-auto">
@@ -169,7 +254,7 @@
 
             <div class="modal-body">
                 <!-- Add [(ngModel)] to bind input fields to component variables -->
-                <form (submit)="modifyProfile(user)">
+                <form (ngSubmit)="modifyProfile(user)">
                     <div class="mb-3">
                         <label for="nomCompletAdmin" class="col-form-label">Nom complet:</label>
                         <input type="text" class="form-control border border-danger" id="nomCompletAdmin" name="name"

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommandeService } from 'src/app/Services/commande.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-commandes',
@@ -59,20 +60,66 @@ descriptif :string="";
   );
   }
 
-  annulerCommande(commadeId : any){
-    this.commandeService.annuleruneCommandeservice(commadeId).subscribe(
-      (responses:any)=>{
-        console.log("c'est la reponse du reponse", responses);
+  annulerCommande(commadeId: any): void {
+    // Afficher une boîte de dialogue de confirmation avant d'annuler la commande
+    Swal.fire({
+      title: 'Êtes-vous sûr(e) de vouloir annuler cette commande ?',
+      text: 'Cette action est irréversible !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, annuler',
+      cancelButtonText: 'Non, ne pas annuler',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // L'utilisateur a confirmé l'annulation, continuez avec la requête de service
+        this.commandeService.annuleruneCommandeservice(commadeId).subscribe(
+          (responses: any) => {
+            console.log("C'est la réponse après l'annulation :", responses);
+  
+            // Afficher une boîte de dialogue de succès après l'annulation
+            Swal.fire('Commande annulée !', 'La commande a été annulée avec succès.', 'success');
+          },
+          (error) => {
+            console.error('Erreur lors de l\'annulation de la commande :', error);
+  
+            // Afficher une boîte de dialogue d'erreur en cas d'échec de l'annulation
+            Swal.fire('Erreur', 'Une erreur est survenue lors de l\'annulation de la commande.', 'error');
+          }
+        );
       }
-    )
+    });
   }
-  termine(commandeId :any){
-    this.commandeService.accepterCommandeservice(commandeId).subscribe(
-      (responses:any)=>{
-        console.log("c'est la reponse du reponse", responses);
+  
+  termine(commandeId: any): void {
+    // Afficher une boîte de dialogue de confirmation avant de terminer la commande
+    Swal.fire({
+      title: 'Êtes-vous sûr(e) de vouloir terminer cette commande ?',
+      text: 'Le client a-t-il reçu la commande !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, il a recu',
+      cancelButtonText: 'Non, pas encore',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // L'utilisateur a confirmé la terminaison, continuez avec la requête de service
+        this.commandeService.accepterCommandeservice(commandeId).subscribe(
+          (responses: any) => {
+            // console.log("C'est la réponse après la terminaison :", responses);
+  
+            // Afficher une boîte de dialogue de succès après la terminaison
+            Swal.fire('Commande terminée !', 'Le client a reçu avec succès sa commande.', 'success');
+          },
+          (error) => {
+            console.error('Erreur lors de la terminaison de la commande :', error);
+  
+            // Afficher une boîte de dialogue d'erreur en cas d'échec de la terminaison
+            Swal.fire('Erreur', 'Une erreur est survenue lors de la terminaison de la commande.', 'error');
+          }
+        );
       }
-    )
+    });
   }
+  
   detailCommande(commadeId : any){
     this.commandeService.detailsRestoCommandeservice(commadeId).subscribe(
       (responses:any)=>{

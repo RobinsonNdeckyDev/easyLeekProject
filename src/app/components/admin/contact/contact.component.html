@@ -1,5 +1,5 @@
 <div class="py-4 px-4">
-    <h5 class="navTitle"><a href="" routerLink="contact" class="my-3">Liste des messages</a></h5>
+    <h5 class="navTitle text-center fw-bold"><a href="" routerLink="contact" class="my-3">Liste des messages</a></h5>
 
     <div class="row .row2 mt-4 shadow rounded-4">
         <div class="col-12 ">
@@ -13,31 +13,26 @@
                 <div class="table-responsive">
                     <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100">
                         <thead>
-                            <tr class="text-center titleHead">
+                            <tr class=" titleHead">
                                 <th scope="col">Nom complet</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">message</th>
                                 <th scope="col">Date</th>
-                                <th scope="col">Action</th>
+                                <!-- <th scope="col">Action</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
-                                <td scope="col"></td>
-                                <td scope="col"></td>
-                                <td scope="col"></td>
-                                <td scope="col"></td>
-                                <td scope="col">
-                                    <span class="mx-2"><i class="fa-solid fa-eye iconDetail" data-bs-toggle="modal"
-                                            data-bs-target="#detailClient">
-                                            <!-- (click)="openAcheteurDetails(acheteur)" -->
-                                        </i>
-                                    </span>
-                                    <span class="mx-2"><i class="bi bi-x-square-fill iconDetail">
-                                            <!-- (click)="supprimerAcheteur(acheteur)" -->
-                                        </i>
-                                    </span>
-                                </td>
+                            <!-- <tr class="text-center" >
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> -->
+                            <tr class="" *ngFor="let message of messages">
+                                <td scope="col">{{ message.name }}</td>
+                                <td scope="col">{{ message.email }}</td>
+                                <td scope="col">{{ message.message }}</td>
+                                <td scope="col">{{ message.updated_at | date:'dd/MM/yyyy' }}</td>
                             </tr>
                         </tbody>
                     </table>

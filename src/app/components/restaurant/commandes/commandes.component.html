@@ -1,19 +1,24 @@
 <div class="py-4 px-4">
-    <h5 class="navTitle"><a href="" routerLink="commandes" class="my-3 ">Liste des commandes</a></h5>
+    <h5 class="navTitle text-center fw-bold"><a href="" routerLink="commandes" class="my-3 ">Liste des commandes</a></h5>
 
     <div class="row .row2 mt-4 shadow rounded-4">
         <div class="col-12 ">
             <div class="tableCard py-4 border-0 ">
 
-                <button class="btn mb-4 active" (click)="etatSelectionne = 'acceptee'">
-                    Commande accepter
-                </button>
-                <button class="btn mb-4 active" (click)="etatSelectionne = 'refusee'">
-                    Commande refuser
-                </button>
-                <button class="btn mb-4 active" (click)="etatSelectionne = 'terminee'">
-                    Commande terminer
-                </button>
+                <div>
+                    <button class="btn mb-4" [ngClass]="{'active': etatSelectionne === 'acceptee'}" (click)="etatSelectionne = 'acceptee'">
+                        Commande accepter
+                    </button>
+                    
+                    <button class="btn mb-4" [ngClass]="{'active': etatSelectionne === 'refusee'}" (click)="etatSelectionne = 'refusee'">
+                        Commande refuser
+                    </button>
+                    
+                    <button class="btn mb-4" [ngClass]="{'active': etatSelectionne === 'terminee'}" (click)="etatSelectionne = 'terminee'">
+                        Commande terminer
+                    </button>
+                    
+            </div>
                 <div class="table-responsive">
                     <table datatable [dtOptions]="dtOptions" class="table row-border hover w-100">
                         <thead>
@@ -64,17 +69,17 @@
    <div class="modal-dialog">
      <div class="modal-content">
        <div class="modal-header">
-         <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+         <h1 class="modal-title fs-5" id="exampleModalLabel">Commande de {{commande.user.name}}</h1>
          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
        </div>
        <div class="modal-body" >
-            <h2>{{commande.lieuLivraison}}</h2>
-             <h2>{{commande.prixCommande}}</h2>
-             <h2>{{commande.user.name}}</h2>
-               {{ commande.nomPlat }}
+            <h5>Lieu de livraison : <span class="fw-light ">{{commande.lieuLivraison}}</span></h5>
+             <h5>Prix de la commande : <span class="fw-light ">{{commande.prixCommande}}</span></h5>
+             <h5>Le nom du plat : <span class="fw-light ">{{ commande.nomPlat }}</span> </h5>
+              <h5>L'etat de la commande :  <span class="fw-light ">{{commande.etatCommande}}</span></h5> 
        </div>
        <div class="modal-footer">
-         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fermer</button>
          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
        </div>
      </div>

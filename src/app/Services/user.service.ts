@@ -25,11 +25,13 @@ export class UserService {
     const headers = this.getHeaders();
     return this.http.get<any>(this.userUrl , { headers });
   }
-  modifyUserProfile(userId: any, profileData: any): Observable<any> {
-    const url = `${this.apiUrl}/auth/user/modify/profile/${userId}`;
-    const headers = this.getHeaders();
-    return this.http.post<any>(url, profileData, { headers });
-  }
+
+modifyUserProfile(userId: any, profileData: any): Observable<any> {
+  const url = `${this.apiUrl}/auth/user/modify/profile/${userId}`;
+  const headers = this.getHeaders();
+  return this.http.post<any>(url, profileData, { headers: this.getHeaders() });
+}
+
   
 }
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClientService } from 'src/app/Services/client/client.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class ContactComponent {
   dtOptions: DataTables.Settings = {};
+  messages :any []=[];
+  constructor( private messageService :ClientService){}
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -27,5 +30,16 @@ export class ContactComponent {
         },
       },
     };
+    this.getmessageuser()
   }
+
+  getmessageuser() {
+    this.messageService.messageRecus().subscribe((messages: any) => {
+      console.log("La liste des categories", messages)
+      this.messages = messages.menu;
+    });
+  }
+
+
 }
+  

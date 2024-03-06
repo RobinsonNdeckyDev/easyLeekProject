@@ -138,4 +138,41 @@ constructor(private menusservice: PlatService ,  private platservice: GestionPla
       },
     );
   }
+
+  // Messages de validation
+validationMessages: { [key: string]: string } = {};
+newmenuTouched: boolean = false;
+
+   // Regex newmenu et nom
+   regexPattern = /^[a-zA-Z]{5,}$/;
+   // Déclaration des propriétés Empty
+newmenuEmpty: boolean = false;
+nomEmpty: boolean = false;
+
+   // Validation nom
+   // ...
+
+// Validation nom
+validatenewmenu(): boolean {
+  this.newmenuTouched = true;
+
+  if (!this.newmenu) {
+    this.validationMessages['newmenu'] = 'Le newmenu est requis';
+    this.newmenuEmpty = true; // Set newmenuEmpty to true when the field is empty
+    return false;
+  } else if (!this.regexPattern.test(this.newmenu)) {
+    this.validationMessages['newmenu'] =
+      'Pas de chiffres et de caractères pour le newmenu';
+    this.newmenuEmpty = false;
+    return false;
+  } else if (this.newmenu.length < 5) { // Adjust the minimum length condition
+    this.validationMessages['newmenu'] = 'Le newmenu est trop court';
+    this.newmenuEmpty = false;
+    return false;
+  } else {
+    this.validationMessages['newmenu'] = '';
+    this.newmenuEmpty = true; // Set typeEmpty to true when the input is correct
+    return true;
+  }
+}
 }

@@ -1,4 +1,5 @@
 /* @import url(../dashboard-admin/dashboard-admin.component.css); */
+@import url(/src/app/components/admin/styleAmin.css);
 
 .coords i {
     color: var(--rose) !important;

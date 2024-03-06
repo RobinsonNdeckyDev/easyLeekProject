@@ -1,0 +1,30 @@
+@import url(/src/app/components/restaurant/styleResto.css);
+
+/* Pagination styles */
+.pagin .pagination .page-link {
+    color: var(--rose);
+  }
+  
+  .pagin .pagination .page-item.active .page-link {
+    background-color: var(--rose);
+    border-color: var(--rose);
+    color: white;
+  }
+  .boutonajouter-plat{
+    background-color: var(--rose);
+    color: white;
+  }
+  .iconsearch{
+    background-color: var(--rose);
+    color: white;
+  }
+  .imgdiminuer{
+    width: 25vh;
+    height: 25vh;
+  }
+  .colorerr{
+    color: var(--rose);
+    font-weight: 500;
+  }
+
+

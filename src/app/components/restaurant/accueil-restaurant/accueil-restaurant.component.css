@@ -4,22 +4,25 @@
 }
 
 .tableCard .text{
-    color: #0F42A8;
+    color: var(--rose);
 }
 
+.cardImg{
+ background-color: var(--fisa);
+}
 .imgProp{
     width: 50px;
     height: 50px;
-    border: 1px dotted #0F42A8;
+    border: 1px dotted var(--maron);
 }
 
 .titleHead th {
-    color: #0F42A8;
+    color: var(--rose);
     text-align: center;
 }
 
 .cardLogo{
-    border: 1px solid #0F42A8;
+    border: 1px solid var(--rose);
     background-color: white;
     padding: 15px;
     width: 80px;
@@ -49,7 +52,7 @@
 }
 
 .cardBody span{
-    color: #0F42A8;
+    color: var(--rose);
     font-weight: 700;
 }
 
@@ -77,11 +80,11 @@
 }
 
 .row2 table .titreTab th{
-    color: #0F42A8 !important;
+    color: var(--rose) !important;
 }
 
 .row2 table .detailIcon i{
-    color: #0F42A8;
+    color: var(--rose);
     font-size: 20px;
     cursor: pointer;
 }

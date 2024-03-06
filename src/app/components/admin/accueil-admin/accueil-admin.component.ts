@@ -29,42 +29,37 @@ ngOnInit(): void {
 
 getAdminData(): void {
   this.clientService.getListeClients().subscribe((clients: any) => {
-    console.log("clients ", clients);
+    // console.log("clients ", clients);
     this.clients = clients.data;
     this.updateCountsAndChart();
   });
 
   this.restoService.getListeRestaurateurs().subscribe((restaurants: any) => {
-    console.log("resto", restaurants);
+    // console.log("resto", restaurants);
     this.restaurants = restaurants.data;
     this.updateCountsAndChart();
   });
 
   this.categorieService.getAllCategories().subscribe((categories: any) => {
-    console.log("categorie", categories);
+    // console.log("categorie", categories);
     this.categories = categories.data;
     this.updateCountsAndChart();
   });
 
   this.messageService.messageRecus().subscribe((messages: any) => {
-    console.log("messages",messages.menu);
+    // console.log("messages",messages.menu);
     this.messages = messages?.menu || [];
-    // Additional logic based on 'messages' if needed
     this.updateCountsAndChart();
 
   });
 
-  // Additional logic specific to 'messages' if needed
-
-  // Example updating chart data
   this.createChart();
 }
 
 private updateCountsAndChart(): void {
-  // Example updating nombreClient, nombreResto, and nombreCategorie
-  this.nombreClient = this.clients.length; // Assuming you have a property 'clients'
-  this.nombreResto = this.restaurants.length; // Assuming you have a property 'restaurants'
-  this.nombreCategorie = this.categories.length; // Assuming you have a property 'categories'
+  this.nombreClient = this.clients.length; 
+  this.nombreResto = this.restaurants.length; 
+  this.nombreCategorie = this.categories.length; 
 
   // Example updating chart data
   this.createChart();
@@ -72,7 +67,6 @@ private updateCountsAndChart(): void {
 
 
 createChart(): void {
-  // ... (your existing chart creation logic)
 }
 }
 

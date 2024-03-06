@@ -1,6 +1,6 @@
 
 footer{
-    /* background-color: #ffc4ac; */
+    background-color: #ffc4ac;
 }
 
 .Easylekk{
@@ -19,7 +19,9 @@ ul li a {
 }
 
 
-
+.footerDuresto{
+    background-color: #F8F3C6;
+}
 /* img {
     width: 66px;
 }

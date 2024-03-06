@@ -1,10 +1,9 @@
-@import url(/src/app/components/admin/styleAmin.css);
-
+a{
+    text-decoration: none;
+    color: var(--rose);
+}
 .boutonajouter-blog{
     background-color: #FFA07A;
     color: white;
     border: 2px solid #FFA07A ;
-  }
-  .textColor{
-    color: var(--rose);
   }

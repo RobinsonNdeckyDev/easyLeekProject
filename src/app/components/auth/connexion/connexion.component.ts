@@ -40,8 +40,7 @@ emailEmpty: boolean = false;
 passwordEmpty: boolean = false;
 
 // Déclaration des propriétés touched
-prenomTouched: boolean = false;
-nomTouched: boolean = false;
+usernameTouched: boolean = false;
 telephoneTouched: boolean = false;
 confirmationTouched: boolean = false;
 adresseTouched: boolean = false;
@@ -49,8 +48,7 @@ photoTouched: boolean = false;
 descriptionTouched: boolean = false;
 
 // Déclaration des propriétés Empty
-prenomEmpty: boolean = false;
-nomEmpty: boolean = false;
+usernameEmpty: boolean = false;
 telephoneEmpty: boolean = false;
 confirmationEmpty: boolean = false;
 adresseEmpty: boolean = false;
@@ -71,25 +69,25 @@ passwordRegex: RegExp = /^[A-Za-z0-9._%+-]{8,}$/;
   telephoneRegex: RegExp =/^(70|75|76|77|78)[0-9]{7}$/;
 
 
-  // Regex prenom et nom
+  // Regex username et username
   regexPattern = /^[a-zA-Z]{3}$/;
 
- // Validation nom
- validatePrenom(): boolean {
-  this.nomTouched = true;
+ // Validation username
+ validateusername(): boolean {
+  this.usernameTouched = true;
   if (!this.username) {
-    this.validationMessages['nom'] = 'Le nom est requis';
+    this.validationMessages['username'] = 'Le username est requis';
     return false;
   } else if (!this.regexPattern.test(this.username)) {
-    this.validationMessages['nom'] =
-      'Pas de chiffres et de caractéres pour le nom';
-    this.nomEmpty = false;
+    this.validationMessages['username'] =
+      'Pas de chiffres et de caractéres pour le username';
+    this.usernameEmpty = false;
     return false;
   } else if (this.username.length < 4) {
-    this.validationMessages['nom'] = 'Le nom est trop court';
+    this.validationMessages['username'] = 'Le username est trop court';
     return false;
   } else {
-    this.validationMessages['nom'] = '';
+    this.validationMessages['username'] = '';
     return true;
   }
 }
@@ -110,6 +108,22 @@ validateEmail(): boolean {
     return true;
   }
 }
+validateEmailInsc(): boolean {
+  if (!this.registerEmail) {
+    this.validationMessages['email'] = "L'email est requis";
+    this.emailEmpty = true; // Mettre à jour emailEmpty si le champ est vide
+    return false;
+  } else if (!this.emailPattern.test(this.registerEmail)) {
+    this.validationMessages['email'] = 'Email invalide';
+    this.emailEmpty = false; // Mettre à jour emailEmpty si le champ n'est pas vide
+    return false;
+  } else {
+    this.validationMessages['email'] = '';
+    this.emailEmpty = false; // Mettre à jour emailEmpty si le champ n'est pas vide
+    return true;
+  }
+}
+
 
 // Méthode de validation pour le téléphone
 validateTelephone() {
@@ -137,7 +151,7 @@ validatePassword() {
     return false;
   } else if (!this.passwordRegex.test(this.password)) {
     this.validationMessages['password'] =
-      'Le mot de passe doit contenir au moins 6 chiffres';
+      'Le mot de passe doit contenir au moins 8 chiffres';
     this.passwordEmpty = false;
     return false;
   } else {
@@ -146,7 +160,23 @@ validatePassword() {
     return true;
   }
 }
-
+validatePasswordInc()
+{
+  if (!this.registerPassword) {
+    this.validationMessages['password'] = 'Le mot de passe est requis';
+    this.passwordEmpty = true;
+    return false;
+  } else if (!this.passwordRegex.test(this.registerPassword)) {
+    this.validationMessages['password'] =
+      'Le mot de passe doit contenir au moins 8 chiffres';
+    this.passwordEmpty = false;
+    return false;
+  } else {
+    this.validationMessages['password'] = '';
+    this.passwordEmpty = false;
+    return true;
+  }
+}
 // Méthode de validation pour le champ "adresse"
 validateAdresse() {
   if (!this.adresse) {
@@ -180,7 +210,7 @@ validateAdresse() {
       Swal.fire({
         icon: 'error',
         title: 'Erreur!',
-        text: 'Le nom doit contenir au moins 3 caractères.',
+        text: 'Le username doit contenir au moins 3 caractères.',
       });
       return;
     }

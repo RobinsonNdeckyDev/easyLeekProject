@@ -13,9 +13,18 @@
           <form class="titremenu" (ngSubmit)="addmenu()">
             <div class="mb-3">
               <label for="titremenu">Titre du menu:</label>
-              <input class="form-control" type="text" id="titremenu" name="titremenu" required [(ngModel)]="newmenu">
+              <input class="form-control" type="text" id="titremenu" name="titremenu" required [(ngModel)]="newmenu" (input)="validatenewmenu()" >
+              <!-- <span *ngIf="newmenuTouched && newmenuEmpty && !validationMessages['newmenu']" class="text-danger">
+              Le nom est requis
+            </span> -->
+            <span *ngIf="validationMessages['newmenu']" class="text-danger">{{ validationMessages['newmenu'] }}</span>
+            <span *ngIf="!validationMessages['newmenu'] && newmenu" class="text-success">Correct</span>
             </div>
-            <button class="btn btn-add" type="submit">Ajouter</button>
+            <div class="d-flex justify-content-end gap-3">
+              <button class="btn boutonajouter-blog" type="submit">Ajouter</button>
+              <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuler</button>
+            </div>
+            
           </form>
         </div>
       </div>
@@ -38,7 +47,7 @@
               <input id="editTitle" class="form-control" name="titre" required [(ngModel)]="editedTitre">
             </div>
             <div class="mdfBtns d-flex justify-content-between">
-              <button type="submit" class="btn btnUpdate" data-bs-dismiss="modal">Enregistrer</button>
+              <button type="submit" class="btn boutonajouter-blog" data-bs-dismiss="modal">Enregistrer</button>
               <button type="button" class="btn btnAnnuler" data-bs-dismiss="modal">Annuler</button>
             </div>
           </form>
@@ -78,7 +87,7 @@
 
 
 <div class="py-4 px-4">
-  <h5 class="navTitle"><a href="" routerLink="menus" class="my-3">Liste des menus</a></h5>
+  <h5 class="navTitle text-center fw-bold "><a href="" routerLink="menus" class="my-3">Liste des menus</a></h5>
 
   <div class="row .row2 mt-4 shadow rounded-4">
     <div class="col-12 ">

@@ -1,0 +1,5 @@
+@import url(/src/app/components/restaurant/styleResto.css);
+.active {
+    background-color: var(--rose); 
+    color: #fff; 
+}

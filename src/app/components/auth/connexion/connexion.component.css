@@ -42,6 +42,7 @@ input {
 }
 
 form {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,8 +70,10 @@ form.sign-in-form {
 }
 
 .input-field {
-    max-width: 380px;
-    width: 100%;
+        max-width: 100%; /* Modifier la largeur selon les besoins */
+        width: 100%;
+    /* max-width: 380px;
+    width: 100%; */
     background-color: #f0f0f0;
     margin: 10px 0;
     height: 55px;
@@ -135,8 +138,7 @@ form.sign-in-form {
 }
 
 .btn {
-    width: 150px;
-    background-color: #5D3C22;
+ background-color: #5D3C22;
     border: none;
     outline: none;
     height: 49px;
@@ -160,7 +162,7 @@ form.sign-in-form {
     top: 0;
     left: 0;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 2.5fr 1fr;
 }
 
 .container:before {
@@ -194,7 +196,7 @@ form.sign-in-form {
 
 .left-panel {
     pointer-events: all;
-    padding: 3rem 17% 2rem 12%;
+    padding: 2% 17% 10% 12%;
 }
 
 .right-panel {

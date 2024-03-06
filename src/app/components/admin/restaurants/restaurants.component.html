@@ -1,5 +1,5 @@
 <div class="py-4 px-4">
-  <h5 class="navTitle"><a href="" routerLink="restaurants" class="my-3">Liste des Restaurants</a></h5>
+  <h5 class="navTitle text-center fw-bold"><a href="" routerLink="restaurants" class="my-3">Liste des Restaurants</a></h5>
 
   <div class="row .row2 mt-4 shadow rounded-4">
     <div class="col-12 ">
@@ -102,29 +102,36 @@
 <!-- ajout restaurateur -->
 <!-- details restaurateur -->
 <!-- Modal pour afficher les détails d'un restaurateur -->
-<div class="modal fade" id="detailrestaurateurModal" tabindex="-1" aria-labelledby="detailrestaurateurModalLabel"
+<div class="modal fade modal-lg" id="detailrestaurateurModal" tabindex="-1" aria-labelledby="detailrestaurateurModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title w-100 fs-4 titreAjout text-center">Détails du restaurateur</h1>
+        <h1 class="modal-title w-100 fs-4 titreAjout text-center">Détails du restaurateur : {{ name }}</h1>
         <button type="button" class="btn btn-closeAjout" data-bs-dismiss="modal" id="close-modal"><i
             class="bi bi-x-lg"></i></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body d-flex justify-content-between gap-3">
         <!-- Affichez ici les détails du restaurateur -->
         <div>
-          <h2>Nom du restaurateur:</h2>
-          <p>{{ name }}</p>
+          <img src="{{ image }}" alt="image du restaurant" >
         </div>
         <div>
-          <h2>Adresse du restaurateur:</h2>
-          <p>{{ adresse }}</p>
+          <div>
+            <h3>Adresse du restaurateur:</h3>
+            <p class="fw-bold textColor">{{ adresse }}</p>
+          </div>
+          <div>
+            <h3>Numéro de téléphone:</h3>
+            <p class="fw-bold textColor">{{ phone }}</p>
+          </div>
+          <div>
+            <h3>Description:</h3>
+            <p class="fw-bold textColor">{{ description }}</p>
+          </div>
         </div>
-        <div>
-          <h2>Numéro de téléphone:</h2>
-          <p>{{ phone }}</p>
-        </div>
+        
+        
       </div>
       <div class="modal-footer">
         <!-- <button class="btn btn-danger" data-bs-dismiss="modal">Desactiver </button> -->

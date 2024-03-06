@@ -22,6 +22,8 @@ export class PanierComponent {
       title: title,
       text: message,
       icon: icon
+    }).then(() => {
+      Swal.close();
     });
   }
 
@@ -119,11 +121,11 @@ export class PanierComponent {
 
       this.panierService.envoyerCommande(commande).subscribe(
         (response) => {
-          console.log("je suis un truc du panier ", response);
-
-          this.panierService.viderPanier();
+          // console.log("je suis un truc du panier ", response);
+          
           this.message('Succès', 'success', 'Commande passée avec succès.');
           this.router.navigate(['/profil']);
+          this.panierService.viderPanier();
         },
         // (error) => {
         //   console.log("erreur de l'erreur", error);
@@ -134,7 +136,7 @@ export class PanierComponent {
       
      
     } else if(!this.authService.isLoggedIn()){
-      this.message('Erreur', 'error', 'Une erreur s\'est produite lors de la commande.');
+      this.message('Erreur', 'error', 'veuillez-vous connecter pour termine la commande.');
        this.router.navigate(['/login']);
       return;
     }

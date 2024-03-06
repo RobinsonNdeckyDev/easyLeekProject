@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/Services/auth.service';
 export class NavbarComponent {
   @Output() toggleSidebarEvent = new EventEmitter<void>();
 user: any;
+restaurateur: any;
+image: any;
 
   toggleSidebar() {
     this.toggleSidebarEvent.emit();
@@ -18,4 +20,6 @@ user: any;
   logout(): void {
     this.authService.logout();
   }
+
+
   }
